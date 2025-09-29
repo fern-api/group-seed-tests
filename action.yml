@@ -17,8 +17,8 @@ inputs:
       The maximum number of runners that can be used (determines upper limit of
       packages)
     required: true
-  json-data:
-    description: JSON data to process
+  seed-test-log-file-path:
+    description: Log file to parse test output from
     required: true
 
 # Define outputs

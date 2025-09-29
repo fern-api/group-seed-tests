@@ -55,8 +55,10 @@ export async function run(): Promise<void> {
       const fileContent = fs.readFileSync(seedTestLogFilePath, 'utf-8')
       // console.log('File content:', fileContent);
 
-      const startTag: string = '<CLI-SEED-TEST-PARSING-TAG>'
-      const endTag: string = '<CLI-SEED-TEST-PARSING-TAG/>'
+      // const startTag: string = '<CLI-SEED-TEST-PARSING-TAG>'
+      // const endTag: string = '<CLI-SEED-TEST-PARSING-TAG/>'
+      const startTag: string = '┌──────'
+      const endTag: string = 'test cases' // CHRISM - just for testing but should add tags
       const startIndex: number = fileContent.indexOf(startTag)
       const endIndex: number = fileContent.indexOf(
         endTag,
