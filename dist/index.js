@@ -27497,9 +27497,12 @@ async function parseDataFromSeedTestAsciiTable(input) {
             throw new Error(`Missing GenerationTime data in row ${i}`);
         if (!rowData[compileTimeIndex])
             throw new Error(`Missing CompileTime data in row ${i}`);
+        // Combo the output folder name if it exists
+        const fullTestName = rowData[outputFolderIndex] !== '--'
+            ? `${rowData[nameIndex]}:${rowData[outputFolderIndex]}`
+            : rowData[nameIndex];
         const parsedRow = {
-            Name: rowData[nameIndex],
-            OutputFolder: rowData[outputFolderIndex],
+            Name: fullTestName,
             GenerationTime: rowData[generationTimeIndex],
             CompileTime: rowData[compileTimeIndex]
         };

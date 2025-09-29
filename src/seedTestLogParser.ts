@@ -1,7 +1,6 @@
 // Return JSON string of data
 export interface ParsedRow {
   Name: string
-  OutputFolder: string
   GenerationTime: string
   CompileTime: string
 }
@@ -110,9 +109,14 @@ export async function parseDataFromSeedTestAsciiTable(
     if (!rowData[compileTimeIndex])
       throw new Error(`Missing CompileTime data in row ${i}`)
 
+    // Combo the output folder name if it exists
+    const fullTestName: string =
+      rowData[outputFolderIndex] !== '--'
+        ? `${rowData[nameIndex]}:${rowData[outputFolderIndex]}`
+        : rowData[nameIndex]
+
     const parsedRow: ParsedRow = {
-      Name: rowData[nameIndex],
-      OutputFolder: rowData[outputFolderIndex],
+      Name: fullTestName,
       GenerationTime: rowData[generationTimeIndex],
       CompileTime: rowData[compileTimeIndex]
     }
