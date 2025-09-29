@@ -104,8 +104,7 @@ export async function parseDataFromSeedTestAsciiTable(
     // but for now need to work around the fact that we don't require these to pass and so
     // a lot fail (and thus don't have one of the times available)
     // Error if any expected data is missing
-    if (!rowData[nameIndex]) 
-        throw new Error(`Missing Name data in row ${i}`)
+    if (!rowData[nameIndex]) throw new Error(`Missing Name data in row ${i}`)
     if (!rowData[outputFolderIndex])
       throw new Error(`Missing OutputFolder data in row ${i}`)
     // if (!rowData[generationTimeIndex])
@@ -121,7 +120,9 @@ export async function parseDataFromSeedTestAsciiTable(
 
     const parsedRow: ParsedRow = {
       Name: fullTestName,
-      GenerationTime: rowData[generationTimeIndex] ? rowData[generationTimeIndex] : '0',
+      GenerationTime: rowData[generationTimeIndex]
+        ? rowData[generationTimeIndex]
+        : '0',
       CompileTime: rowData[compileTimeIndex] ? rowData[compileTimeIndex] : '0'
     }
 
