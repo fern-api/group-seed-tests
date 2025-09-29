@@ -27327,7 +27327,7 @@ function createBalancedGroups(items, numGroups) {
     // Initialize groups with empty arrays and zero total time
     const groups = Array.from({ length: numGroups }, () => ({
         fixtures: [],
-        totalTime: 0
+        packageTotalTime: 0
     }));
     // Sort items by time descending (largest first)
     // This helps achieve better balance by placing heavy items first
@@ -27336,16 +27336,16 @@ function createBalancedGroups(items, numGroups) {
     for (const item of sortedItems) {
         // Find group with minimum total time
         let minIndex = 0;
-        let minTime = groups[0].totalTime;
+        let minTime = groups[0].packageTotalTime;
         for (let i = 1; i < groups.length; i++) {
-            if (groups[i].totalTime < minTime) {
-                minTime = groups[i].totalTime;
+            if (groups[i].packageTotalTime < minTime) {
+                minTime = groups[i].packageTotalTime;
                 minIndex = i;
             }
         }
         // Add item to the group with minimum time
         groups[minIndex].fixtures.push(item.name);
-        groups[minIndex].totalTime += item.time;
+        groups[minIndex].packageTotalTime += item.time;
     }
     return groups;
 }
