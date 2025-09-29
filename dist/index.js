@@ -27522,6 +27522,7 @@ async function run() {
         const seedGeneratorAlias = coreExports.getInput('seed-generator-alias');
         const maxRunnerCount = coreExports.getInput('max-runner-count');
         // const jsonData: string = core.getInput('json-data');
+        const splitTestsCutoffTimeInSeconds = coreExports.getInput('split-tests-cutoff-time-in-seconds');
         const seedTestLogFilePath = coreExports.getInput('seed-test-log-file-path');
         // Start by validating inputs
         // Validate seed-generator-alias
@@ -27576,7 +27577,7 @@ async function run() {
             console.error('Error reading seed test log file:', error);
         }
         console.log('Successfully parsed test table from test log file!');
-        console.debug(`extractedTableOfTests:\n${extractedTableOfTests}`);
+        // console.debug(`extractedTableOfTests:\n${extractedTableOfTests}`)
         let extractedJsonData = await parseDataFromSeedTestAsciiTable(extractedTableOfTests);
         // Validate extracted json-data
         if (!extractedJsonData) {
@@ -27597,9 +27598,13 @@ async function run() {
         const balancedGroups = createBalancedGroups(itemsArray, parseInt(maxRunnerCount));
         const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2);
         console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`);
+        const totalTestTime = Object.values(result).reduce((sum, time) => sum + time, 0);
+        const totalTestTimeRounded = Math.round(totalTestTime);
+        console.debug(`Total test time: ${totalTestTimeRounded} seconds (rounded). Split time cutoff: ${splitTestsCutoffTimeInSeconds} seconds.`);
+        const shouldSplitTests = totalTestTimeRounded > parseInt(splitTestsCutoffTimeInSeconds);
         // console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
         coreExports.setOutput('test-matrix', jsonOfBalancedGroups);
-        coreExports.setOutput('split-tests', true);
+        coreExports.setOutput('split-tests', shouldSplitTests);
         // CHRISM - temporary, need to pass back to workflow to save to repo... maybe
         // Save to file
         // fs.writeFileSync('balancedGroups.json', jsonOfBalancedGroups)

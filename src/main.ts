@@ -18,6 +18,9 @@ export async function run(): Promise<void> {
     const seedGeneratorAlias: string = core.getInput('seed-generator-alias')
     const maxRunnerCount: string = core.getInput('max-runner-count')
     // const jsonData: string = core.getInput('json-data');
+    const splitTestsCutoffTimeInSeconds: string = core.getInput(
+      'split-tests-cutoff-time-in-seconds'
+    )
     const seedTestLogFilePath: string = core.getInput('seed-test-log-file-path')
 
     // Start by validating inputs
@@ -82,7 +85,7 @@ export async function run(): Promise<void> {
       console.error('Error reading seed test log file:', error)
     }
     console.log('Successfully parsed test table from test log file!')
-    console.debug(`extractedTableOfTests:\n${extractedTableOfTests}`)
+    // console.debug(`extractedTableOfTests:\n${extractedTableOfTests}`)
 
     let extractedJsonData: ParsedRow[] = await parseDataFromSeedTestAsciiTable(
       extractedTableOfTests
@@ -113,9 +116,22 @@ export async function run(): Promise<void> {
     )
     const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2)
     console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`)
+
+    const totalTestTime = Object.values(result).reduce(
+      (sum, time) => sum + time,
+      0
+    )
+    const totalTestTimeRounded = Math.round(totalTestTime)
+    console.debug(
+      `Total test time: ${totalTestTimeRounded} seconds (rounded). Split time cutoff: ${splitTestsCutoffTimeInSeconds} seconds.`
+    )
+
+    const shouldSplitTests =
+      totalTestTimeRounded > parseInt(splitTestsCutoffTimeInSeconds)
+
     // console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
     core.setOutput('test-matrix', jsonOfBalancedGroups)
-    core.setOutput('split-tests', true)
+    core.setOutput('split-tests', shouldSplitTests)
 
     // CHRISM - temporary, need to pass back to workflow to save to repo... maybe
     // Save to file
