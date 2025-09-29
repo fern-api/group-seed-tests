@@ -27607,12 +27607,15 @@ async function run() {
         const totalTestTimeRounded = Math.round(totalTestTime);
         console.debug(`Total test time: ${totalTestTimeRounded} seconds (rounded). Split time cutoff: ${splitTestsCutoffTimeInSeconds} seconds.`);
         const shouldSplitTests = totalTestTimeRounded > parseInt(splitTestsCutoffTimeInSeconds);
-        // console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
-        coreExports.setOutput('test-matrix', jsonOfBalancedGroups);
-        coreExports.setOutput('split-tests', shouldSplitTests);
-        // CHRISM - temporary, need to pass back to workflow to save to repo... maybe
-        // Save to file
-        // fs.writeFileSync('balancedGroups.json', jsonOfBalancedGroups)
+        const fileContents = {
+            'total-test-time': totalTestTimeRounded,
+            'split-cutoff-time': parseInt(splitTestsCutoffTimeInSeconds),
+            'split-tests': shouldSplitTests,
+            packages: JSON.parse(jsonOfBalancedGroups)
+        };
+        const fileContentsAsJson = JSON.stringify(fileContents, null, 2);
+        console.debug(`fileContentsAsJson: ${fileContentsAsJson}`);
+        coreExports.setOutput('json-file-contents', fileContentsAsJson);
     }
     catch (error) {
         coreExports.error(`Error: ${error}`);

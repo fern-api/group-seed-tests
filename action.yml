@@ -26,12 +26,8 @@ inputs:
 
 # Define outputs
 outputs:
-  test-matrix:
-    description: 'Packaged test matrix'
-    # value: ${{ steps.package-test-matrices.outputs.packaged }}
-  split-tests:
-    description: 'Whether to split tests into multiple runners or run as one' #CHRISM - can we determine this in post by packages=1?
-    # value: ${{ steps.determine-test-setups.outputs.split-tests }}
+  json-file-contents:
+    description: 'All information in JSON format for packaging tests'
 
 runs:
   using: node24

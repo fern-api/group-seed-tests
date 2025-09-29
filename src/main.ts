@@ -129,13 +129,17 @@ export async function run(): Promise<void> {
     const shouldSplitTests =
       totalTestTimeRounded > parseInt(splitTestsCutoffTimeInSeconds)
 
-    // console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
-    core.setOutput('test-matrix', jsonOfBalancedGroups)
-    core.setOutput('split-tests', shouldSplitTests)
+    const fileContents = {
+      'total-test-time': totalTestTimeRounded,
+      'split-cutoff-time': parseInt(splitTestsCutoffTimeInSeconds),
+      'split-tests': shouldSplitTests,
+      packages: JSON.parse(jsonOfBalancedGroups)
+    }
 
-    // CHRISM - temporary, need to pass back to workflow to save to repo... maybe
-    // Save to file
-    // fs.writeFileSync('balancedGroups.json', jsonOfBalancedGroups)
+    const fileContentsAsJson = JSON.stringify(fileContents, null, 2)
+    console.debug(`fileContentsAsJson: ${fileContentsAsJson}`)
+
+    core.setOutput('json-file-contents', fileContentsAsJson)
   } catch (error) {
     core.error(`Error: ${error}`)
     return
