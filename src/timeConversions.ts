@@ -35,7 +35,7 @@ function convertToSeconds(timeStr: string): number {
     }
   }
 
-  console.log(`Given String: ${timeStr}. Converted to seconds: ${totalSeconds}`)  
+  console.log(`Given String: ${timeStr}. Converted to seconds: ${totalSeconds}`)
 
   return Math.round(totalSeconds)
 }

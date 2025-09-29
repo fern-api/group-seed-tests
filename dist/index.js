@@ -27267,7 +27267,6 @@ function convertToSeconds(timeStr) {
     const msMatch = timeStr.match(/(\d+(?:\.\d+)?)ms/);
     if (msMatch) {
         totalSeconds += parseFloat(msMatch[1]) / 1000;
-        return totalSeconds;
     }
     else {
         // Extract minutes (if present)
@@ -27281,6 +27280,7 @@ function convertToSeconds(timeStr) {
             totalSeconds += parseFloat(secondMatch[1]);
         }
     }
+    console.log(`Given String: ${timeStr}. Converted to seconds: ${totalSeconds}`);
     return Math.round(totalSeconds);
 }
 //
