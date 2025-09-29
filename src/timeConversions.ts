@@ -21,7 +21,6 @@ function convertToSeconds(timeStr: string): number {
   const msMatch = timeStr.match(/(\d+(?:\.\d+)?)ms/)
   if (msMatch) {
     totalSeconds += parseFloat(msMatch[1]) / 1000
-    return totalSeconds
   } else {
     // Extract minutes (if present)
     const minuteMatch = timeStr.match(/(\d+)m\s/)
@@ -35,6 +34,8 @@ function convertToSeconds(timeStr: string): number {
       totalSeconds += parseFloat(secondMatch[1])
     }
   }
+
+  console.log(`Given String: ${timeStr}. Converted to seconds: ${totalSeconds}`)  
 
   return Math.round(totalSeconds)
 }
