@@ -1,3 +1,4 @@
+import { ParsedRow } from './seedTestLogParser.js'
 // Function to convert time strings to seconds. Acceptable formats as inputs are:
 // 1. 1m 23s
 // 2. 1m 23.7s
@@ -51,20 +52,16 @@ function convertToSeconds(timeStr: string): number {
  * @param {number} numGroups - Number of groups to create
  * @returns {Array} Array of group objects with fixtures array and totalTime
  */
-export function calculateTotalTimes(data: string) {
+export function calculateTotalTimes(data: ParsedRow[]) {
   const totalTimes: Record<string, number> = {}
 
-  for (const [key, times] of Object.entries(data)) {
-    const generationSeconds = convertToSeconds(
-      String((times as any)['GenerationTime'])
-    )
-    const compileSeconds = convertToSeconds(
-      String((times as any)['CompileTime'])
-    )
+  for (const item of data) {
+    const generationSeconds = convertToSeconds(String(item['GenerationTime']))
+    const compileSeconds = convertToSeconds(String(item['CompileTime']))
     const totalSeconds = generationSeconds + compileSeconds
 
-    // Store as number
-    totalTimes[key] = totalSeconds
+    // Store using the Name as the key
+    totalTimes[item.Name] = totalSeconds
   }
 
   return totalTimes

@@ -1,6 +1,5 @@
 // Return JSON string of data
-import * as core from '@actions/core'
-interface ParsedRow {
+export interface ParsedRow {
   Name: string
   OutputFolder: string
   GenerationTime: string
@@ -9,7 +8,7 @@ interface ParsedRow {
 
 export async function parseDataFromSeedTestAsciiTable(
   input: string
-): Promise<string> {
+): Promise<ParsedRow[]> {
   // Strip any ANSI escape sequences when reading in data
   const lines = input
     .trim()
@@ -121,5 +120,5 @@ export async function parseDataFromSeedTestAsciiTable(
     results.push(parsedRow)
   }
 
-  return JSON.stringify(results, null, 2)
+  return results //JSON.stringify(results, null, 2)
 }

@@ -1,11 +1,11 @@
 import require$$0 from 'os';
 import require$$0$1 from 'crypto';
-import fs from 'fs';
-import require$$1$4 from 'path';
+import require$$1 from 'fs';
+import require$$1$5 from 'path';
 import require$$2 from 'http';
 import require$$3 from 'https';
 import require$$0$4 from 'net';
-import require$$1 from 'tls';
+import require$$1$1 from 'tls';
 import require$$4 from 'events';
 import require$$0$3 from 'assert';
 import require$$0$2 from 'util';
@@ -14,14 +14,14 @@ import require$$7 from 'buffer';
 import require$$8 from 'querystring';
 import require$$14 from 'stream/web';
 import require$$0$7 from 'node:stream';
-import require$$1$1 from 'node:util';
+import require$$1$2 from 'node:util';
 import require$$0$6 from 'node:events';
 import require$$0$8 from 'worker_threads';
 import require$$2$1 from 'perf_hooks';
 import require$$5 from 'util/types';
 import require$$4$1 from 'async_hooks';
-import require$$1$2 from 'console';
-import require$$1$3 from 'url';
+import require$$1$3 from 'console';
+import require$$1$4 from 'url';
 import require$$3$1 from 'zlib';
 import require$$6 from 'string_decoder';
 import require$$0$9 from 'diagnostics_channel';
@@ -222,7 +222,7 @@ function requireFileCommand () {
 	// We use any as a valid input type
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	const crypto = __importStar(require$$0$1);
-	const fs$1 = __importStar(fs);
+	const fs = __importStar(require$$1);
 	const os = __importStar(require$$0);
 	const utils_1 = requireUtils$1();
 	function issueFileCommand(command, message) {
@@ -230,10 +230,10 @@ function requireFileCommand () {
 	    if (!filePath) {
 	        throw new Error(`Unable to find environment variable for file command ${command}`);
 	    }
-	    if (!fs$1.existsSync(filePath)) {
+	    if (!fs.existsSync(filePath)) {
 	        throw new Error(`Missing file at path: ${filePath}`);
 	    }
-	    fs$1.appendFileSync(filePath, `${(0, utils_1.toCommandValue)(message)}${os.EOL}`, {
+	    fs.appendFileSync(filePath, `${(0, utils_1.toCommandValue)(message)}${os.EOL}`, {
 	        encoding: 'utf8'
 	    });
 	}
@@ -372,7 +372,7 @@ var hasRequiredTunnel$1;
 function requireTunnel$1 () {
 	if (hasRequiredTunnel$1) return tunnel$1;
 	hasRequiredTunnel$1 = 1;
-	var tls = require$$1;
+	var tls = require$$1$1;
 	var http = require$$2;
 	var https = require$$3;
 	var events = require$$4;
@@ -1754,7 +1754,7 @@ function requireSbmh () {
 	 * by Hongli Lai at: https://github.com/FooBarWidget/boyer-moore-horspool
 	 */
 	const EventEmitter = require$$0$6.EventEmitter;
-	const inherits = require$$1$1.inherits;
+	const inherits = require$$1$2.inherits;
 
 	function SBMH (needle) {
 	  if (typeof needle === 'string') {
@@ -1963,7 +1963,7 @@ function requirePartStream () {
 	if (hasRequiredPartStream) return PartStream_1;
 	hasRequiredPartStream = 1;
 
-	const inherits = require$$1$1.inherits;
+	const inherits = require$$1$2.inherits;
 	const ReadableStream = require$$0$7.Readable;
 
 	function PartStream (opts) {
@@ -2009,7 +2009,7 @@ function requireHeaderParser () {
 	hasRequiredHeaderParser = 1;
 
 	const EventEmitter = require$$0$6.EventEmitter;
-	const inherits = require$$1$1.inherits;
+	const inherits = require$$1$2.inherits;
 	const getLimit = requireGetLimit();
 
 	const StreamSearch = requireSbmh();
@@ -2117,7 +2117,7 @@ function requireDicer () {
 	hasRequiredDicer = 1;
 
 	const WritableStream = require$$0$7.Writable;
-	const inherits = require$$1$1.inherits;
+	const inherits = require$$1$2.inherits;
 
 	const StreamSearch = requireSbmh();
 
@@ -2694,7 +2694,7 @@ function requireMultipart () {
 	//     -- this will require modifications to utils.parseParams
 
 	const { Readable } = require$$0$7;
-	const { inherits } = require$$1$1;
+	const { inherits } = require$$1$2;
 
 	const Dicer = requireDicer();
 
@@ -3260,7 +3260,7 @@ function requireMain () {
 	hasRequiredMain = 1;
 
 	const WritableStream = require$$0$7.Writable;
-	const { inherits } = require$$1$1;
+	const { inherits } = require$$1$2;
 	const Dicer = requireDicer();
 
 	const MultipartParser = requireMultipart();
@@ -8084,7 +8084,7 @@ function requireConnect () {
 	    let socket;
 	    if (protocol === 'https:') {
 	      if (!tls) {
-	        tls = require$$1;
+	        tls = require$$1$1;
 	      }
 	      servername = servername || options.servername || util.getServerName(host) || null;
 
@@ -14108,7 +14108,7 @@ function requirePendingInterceptorsFormatter () {
 	hasRequiredPendingInterceptorsFormatter = 1;
 
 	const { Transform } = require$$0$5;
-	const { Console } = require$$1$2;
+	const { Console } = require$$1$3;
 
 	/**
 	 * Gets the output of `console.table(…)` as a string.
@@ -14335,7 +14335,7 @@ function requireProxyAgent () {
 	hasRequiredProxyAgent = 1;
 
 	const { kProxy, kClose, kDestroy, kInterceptors } = requireSymbols$4();
-	const { URL } = require$$1$3;
+	const { URL } = require$$1$4;
 	const Agent = requireAgent();
 	const Pool = requirePool();
 	const DispatcherBase = requireDispatcherBase();
@@ -25200,7 +25200,7 @@ function requireSummary () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
 		const os_1 = require$$0;
-		const fs_1 = fs;
+		const fs_1 = require$$1;
 		const { access, appendFile, writeFile } = fs_1.promises;
 		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
 		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
@@ -25506,7 +25506,7 @@ function requirePathUtils () {
 	};
 	Object.defineProperty(pathUtils, "__esModule", { value: true });
 	pathUtils.toPlatformPath = pathUtils.toWin32Path = pathUtils.toPosixPath = void 0;
-	const path = __importStar(require$$1$4);
+	const path = __importStar(require$$1$5);
 	/**
 	 * toPosixPath converts the given path to the posix form. On Windows, \\ will be
 	 * replaced with /.
@@ -25592,16 +25592,16 @@ function requireIoUtil () {
 		var _a;
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
-		const fs$1 = __importStar(fs);
-		const path = __importStar(require$$1$4);
-		_a = fs$1.promises
+		const fs = __importStar(require$$1);
+		const path = __importStar(require$$1$5);
+		_a = fs.promises
 		// export const {open} = 'fs'
 		, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
 		// export const {open} = 'fs'
 		exports.IS_WINDOWS = process.platform === 'win32';
 		// See https://github.com/nodejs/node/blob/d0153aee367422d0858105abec186da4dff0a0c5/deps/uv/include/uv/win.h#L691
 		exports.UV_FS_O_EXLOCK = 0x10000000;
-		exports.READONLY = fs$1.constants.O_RDONLY;
+		exports.READONLY = fs.constants.O_RDONLY;
 		function exists(fsPath) {
 		    return __awaiter(this, void 0, void 0, function* () {
 		        try {
@@ -25783,7 +25783,7 @@ function requireIo () {
 	Object.defineProperty(io, "__esModule", { value: true });
 	io.findInPath = io.which = io.mkdirP = io.rmRF = io.mv = io.cp = void 0;
 	const assert_1 = require$$0$3;
-	const path = __importStar(require$$1$4);
+	const path = __importStar(require$$1$5);
 	const ioUtil = __importStar(requireIoUtil());
 	/**
 	 * Copies a file or folder.
@@ -26091,7 +26091,7 @@ function requireToolrunner () {
 	const os = __importStar(require$$0);
 	const events = __importStar(require$$4);
 	const child = __importStar(require$$2$2);
-	const path = __importStar(require$$1$4);
+	const path = __importStar(require$$1$5);
 	const io = __importStar(requireIo());
 	const ioUtil = __importStar(requireIoUtil());
 	const timers_1 = require$$6$1;
@@ -26935,7 +26935,7 @@ function requireCore () {
 		const file_command_1 = requireFileCommand();
 		const utils_1 = requireUtils$1();
 		const os = __importStar(require$$0);
-		const path = __importStar(require$$1$4);
+		const path = __importStar(require$$1$5);
 		const oidc_utils_1 = requireOidcUtils();
 		/**
 		 * The code to exit an action
@@ -27298,12 +27298,12 @@ function convertToSeconds(timeStr) {
  */
 function calculateTotalTimes(data) {
     const totalTimes = {};
-    for (const [key, times] of Object.entries(data)) {
-        const generationSeconds = convertToSeconds(String(times['GenerationTime']));
-        const compileSeconds = convertToSeconds(String(times['CompileTime']));
+    for (const item of data) {
+        const generationSeconds = convertToSeconds(String(item['GenerationTime']));
+        const compileSeconds = convertToSeconds(String(item['CompileTime']));
         const totalSeconds = generationSeconds + compileSeconds;
-        // Store as number
-        totalTimes[key] = totalSeconds;
+        // Store using the Name as the key
+        totalTimes[item.Name] = totalSeconds;
     }
     return totalTimes;
 }
@@ -27505,7 +27505,7 @@ async function parseDataFromSeedTestAsciiTable(input) {
         };
         results.push(parsedRow);
     }
-    return JSON.stringify(results, null, 2);
+    return results; //JSON.stringify(results, null, 2)
 }
 
 /**
@@ -27540,7 +27540,7 @@ async function run() {
         }
         // Validate output-file-path
         if (seedTestLogFilePath) {
-            if (fs.existsSync(seedTestLogFilePath)) {
+            if (require$$1.existsSync(seedTestLogFilePath)) {
                 coreExports.debug(`Seed test log file path exists: ${seedTestLogFilePath}`);
             }
             else {
@@ -27554,7 +27554,7 @@ async function run() {
         }
         let extractedTableOfTests = '';
         try {
-            const fileContent = fs.readFileSync(seedTestLogFilePath, 'utf-8');
+            const fileContent = require$$1.readFileSync(seedTestLogFilePath, 'utf-8');
             // console.log('File content:', fileContent);
             // const startTag: string = '<CLI-SEED-TEST-PARSING-TAG>'
             // const endTag: string = '<CLI-SEED-TEST-PARSING-TAG/>'
@@ -27580,17 +27580,8 @@ async function run() {
             coreExports.error('No data returned from parseTimesFromSeedTestAsciiTable');
             return;
         }
-        let parsedJson;
-        try {
-            parsedJson = JSON.parse(extractedJsonData);
-            coreExports.debug(`JSON is parsable!`);
-        }
-        catch (parseError) {
-            coreExports.error(`Failed to parse JSON data: ${parseError}`);
-            return;
-        }
         // Convert string time format into usable format and combine generation and compile times for a single time
-        const result = calculateTotalTimes(parsedJson); // CHRISM - async await?
+        const result = calculateTotalTimes(extractedJsonData); // CHRISM - async await?
         const jsonOfTestTotalTimes = JSON.stringify(result, null, 2);
         console.debug(`jsonOfTestTotalTimes: ${jsonOfTestTotalTimes}`);
         console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
@@ -27604,9 +27595,11 @@ async function run() {
         const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2);
         console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`);
         // console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
+        coreExports.setOutput('test-matrix', jsonOfBalancedGroups);
+        coreExports.setOutput('split-tests', true);
         // CHRISM - temporary, need to pass back to workflow to save to repo... maybe
         // Save to file
-        fs.writeFileSync('balancedGroups.json', jsonOfBalancedGroups);
+        // fs.writeFileSync('balancedGroups.json', jsonOfBalancedGroups)
     }
     catch (error) {
         coreExports.error(`Error: ${error}`);

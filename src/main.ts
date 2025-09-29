@@ -1,7 +1,10 @@
 import * as core from '@actions/core'
 import { calculateTotalTimes } from './timeConversions.js'
 import { createBalancedGroups } from './packingAlgorithm.js'
-import { parseDataFromSeedTestAsciiTable } from './seedTestLogParser.js'
+import {
+  parseDataFromSeedTestAsciiTable,
+  ParsedRow
+} from './seedTestLogParser.js'
 import fs from 'fs'
 
 /**
@@ -81,7 +84,7 @@ export async function run(): Promise<void> {
     console.log('Successfully parsed test table from test log file!')
     console.debug(`extractedTableOfTests:\n${extractedTableOfTests}`)
 
-    let extractedJsonData: string = await parseDataFromSeedTestAsciiTable(
+    let extractedJsonData: ParsedRow[] = await parseDataFromSeedTestAsciiTable(
       extractedTableOfTests
     )
 
@@ -91,17 +94,8 @@ export async function run(): Promise<void> {
       return
     }
 
-    let parsedJson: string
-    try {
-      parsedJson = JSON.parse(extractedJsonData)
-      core.debug(`JSON is parsable!`)
-    } catch (parseError) {
-      core.error(`Failed to parse JSON data: ${parseError}`)
-      return
-    }
-
     // Convert string time format into usable format and combine generation and compile times for a single time
-    const result = calculateTotalTimes(parsedJson) // CHRISM - async await?
+    const result = calculateTotalTimes(extractedJsonData) // CHRISM - async await?
     const jsonOfTestTotalTimes = JSON.stringify(result, null, 2)
     console.debug(`jsonOfTestTotalTimes: ${jsonOfTestTotalTimes}`)
     console.log(`\nTotal entries processed: ${Object.keys(result).length}`)
@@ -120,10 +114,12 @@ export async function run(): Promise<void> {
     const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2)
     console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`)
     // console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
+    core.setOutput('test-matrix', jsonOfBalancedGroups)
+    core.setOutput('split-tests', true)
 
     // CHRISM - temporary, need to pass back to workflow to save to repo... maybe
     // Save to file
-    fs.writeFileSync('balancedGroups.json', jsonOfBalancedGroups)
+    // fs.writeFileSync('balancedGroups.json', jsonOfBalancedGroups)
   } catch (error) {
     core.error(`Error: ${error}`)
     return
