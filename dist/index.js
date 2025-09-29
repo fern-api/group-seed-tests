@@ -1,11 +1,11 @@
 import require$$0 from 'os';
 import require$$0$1 from 'crypto';
-import require$$1 from 'fs';
-import require$$1$5 from 'path';
+import fs from 'fs';
+import require$$1$4 from 'path';
 import require$$2 from 'http';
 import require$$3 from 'https';
 import require$$0$4 from 'net';
-import require$$1$1 from 'tls';
+import require$$1 from 'tls';
 import require$$4 from 'events';
 import require$$0$3 from 'assert';
 import require$$0$2 from 'util';
@@ -14,14 +14,14 @@ import require$$7 from 'buffer';
 import require$$8 from 'querystring';
 import require$$14 from 'stream/web';
 import require$$0$7 from 'node:stream';
-import require$$1$2 from 'node:util';
+import require$$1$1 from 'node:util';
 import require$$0$6 from 'node:events';
 import require$$0$8 from 'worker_threads';
 import require$$2$1 from 'perf_hooks';
 import require$$5 from 'util/types';
 import require$$4$1 from 'async_hooks';
-import require$$1$3 from 'console';
-import require$$1$4 from 'url';
+import require$$1$2 from 'console';
+import require$$1$3 from 'url';
 import require$$3$1 from 'zlib';
 import require$$6 from 'string_decoder';
 import require$$0$9 from 'diagnostics_channel';
@@ -222,7 +222,7 @@ function requireFileCommand () {
 	// We use any as a valid input type
 	/* eslint-disable @typescript-eslint/no-explicit-any */
 	const crypto = __importStar(require$$0$1);
-	const fs = __importStar(require$$1);
+	const fs$1 = __importStar(fs);
 	const os = __importStar(require$$0);
 	const utils_1 = requireUtils$1();
 	function issueFileCommand(command, message) {
@@ -230,10 +230,10 @@ function requireFileCommand () {
 	    if (!filePath) {
 	        throw new Error(`Unable to find environment variable for file command ${command}`);
 	    }
-	    if (!fs.existsSync(filePath)) {
+	    if (!fs$1.existsSync(filePath)) {
 	        throw new Error(`Missing file at path: ${filePath}`);
 	    }
-	    fs.appendFileSync(filePath, `${(0, utils_1.toCommandValue)(message)}${os.EOL}`, {
+	    fs$1.appendFileSync(filePath, `${(0, utils_1.toCommandValue)(message)}${os.EOL}`, {
 	        encoding: 'utf8'
 	    });
 	}
@@ -372,7 +372,7 @@ var hasRequiredTunnel$1;
 function requireTunnel$1 () {
 	if (hasRequiredTunnel$1) return tunnel$1;
 	hasRequiredTunnel$1 = 1;
-	var tls = require$$1$1;
+	var tls = require$$1;
 	var http = require$$2;
 	var https = require$$3;
 	var events = require$$4;
@@ -1754,7 +1754,7 @@ function requireSbmh () {
 	 * by Hongli Lai at: https://github.com/FooBarWidget/boyer-moore-horspool
 	 */
 	const EventEmitter = require$$0$6.EventEmitter;
-	const inherits = require$$1$2.inherits;
+	const inherits = require$$1$1.inherits;
 
 	function SBMH (needle) {
 	  if (typeof needle === 'string') {
@@ -1963,7 +1963,7 @@ function requirePartStream () {
 	if (hasRequiredPartStream) return PartStream_1;
 	hasRequiredPartStream = 1;
 
-	const inherits = require$$1$2.inherits;
+	const inherits = require$$1$1.inherits;
 	const ReadableStream = require$$0$7.Readable;
 
 	function PartStream (opts) {
@@ -2009,7 +2009,7 @@ function requireHeaderParser () {
 	hasRequiredHeaderParser = 1;
 
 	const EventEmitter = require$$0$6.EventEmitter;
-	const inherits = require$$1$2.inherits;
+	const inherits = require$$1$1.inherits;
 	const getLimit = requireGetLimit();
 
 	const StreamSearch = requireSbmh();
@@ -2117,7 +2117,7 @@ function requireDicer () {
 	hasRequiredDicer = 1;
 
 	const WritableStream = require$$0$7.Writable;
-	const inherits = require$$1$2.inherits;
+	const inherits = require$$1$1.inherits;
 
 	const StreamSearch = requireSbmh();
 
@@ -2694,7 +2694,7 @@ function requireMultipart () {
 	//     -- this will require modifications to utils.parseParams
 
 	const { Readable } = require$$0$7;
-	const { inherits } = require$$1$2;
+	const { inherits } = require$$1$1;
 
 	const Dicer = requireDicer();
 
@@ -3260,7 +3260,7 @@ function requireMain () {
 	hasRequiredMain = 1;
 
 	const WritableStream = require$$0$7.Writable;
-	const { inherits } = require$$1$2;
+	const { inherits } = require$$1$1;
 	const Dicer = requireDicer();
 
 	const MultipartParser = requireMultipart();
@@ -8084,7 +8084,7 @@ function requireConnect () {
 	    let socket;
 	    if (protocol === 'https:') {
 	      if (!tls) {
-	        tls = require$$1$1;
+	        tls = require$$1;
 	      }
 	      servername = servername || options.servername || util.getServerName(host) || null;
 
@@ -14108,7 +14108,7 @@ function requirePendingInterceptorsFormatter () {
 	hasRequiredPendingInterceptorsFormatter = 1;
 
 	const { Transform } = require$$0$5;
-	const { Console } = require$$1$3;
+	const { Console } = require$$1$2;
 
 	/**
 	 * Gets the output of `console.table(…)` as a string.
@@ -14335,7 +14335,7 @@ function requireProxyAgent () {
 	hasRequiredProxyAgent = 1;
 
 	const { kProxy, kClose, kDestroy, kInterceptors } = requireSymbols$4();
-	const { URL } = require$$1$4;
+	const { URL } = require$$1$3;
 	const Agent = requireAgent();
 	const Pool = requirePool();
 	const DispatcherBase = requireDispatcherBase();
@@ -25200,7 +25200,7 @@ function requireSummary () {
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
 		const os_1 = require$$0;
-		const fs_1 = require$$1;
+		const fs_1 = fs;
 		const { access, appendFile, writeFile } = fs_1.promises;
 		exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
 		exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
@@ -25506,7 +25506,7 @@ function requirePathUtils () {
 	};
 	Object.defineProperty(pathUtils, "__esModule", { value: true });
 	pathUtils.toPlatformPath = pathUtils.toWin32Path = pathUtils.toPosixPath = void 0;
-	const path = __importStar(require$$1$5);
+	const path = __importStar(require$$1$4);
 	/**
 	 * toPosixPath converts the given path to the posix form. On Windows, \\ will be
 	 * replaced with /.
@@ -25592,16 +25592,16 @@ function requireIoUtil () {
 		var _a;
 		Object.defineProperty(exports, "__esModule", { value: true });
 		exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
-		const fs = __importStar(require$$1);
-		const path = __importStar(require$$1$5);
-		_a = fs.promises
+		const fs$1 = __importStar(fs);
+		const path = __importStar(require$$1$4);
+		_a = fs$1.promises
 		// export const {open} = 'fs'
 		, exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
 		// export const {open} = 'fs'
 		exports.IS_WINDOWS = process.platform === 'win32';
 		// See https://github.com/nodejs/node/blob/d0153aee367422d0858105abec186da4dff0a0c5/deps/uv/include/uv/win.h#L691
 		exports.UV_FS_O_EXLOCK = 0x10000000;
-		exports.READONLY = fs.constants.O_RDONLY;
+		exports.READONLY = fs$1.constants.O_RDONLY;
 		function exists(fsPath) {
 		    return __awaiter(this, void 0, void 0, function* () {
 		        try {
@@ -25783,7 +25783,7 @@ function requireIo () {
 	Object.defineProperty(io, "__esModule", { value: true });
 	io.findInPath = io.which = io.mkdirP = io.rmRF = io.mv = io.cp = void 0;
 	const assert_1 = require$$0$3;
-	const path = __importStar(require$$1$5);
+	const path = __importStar(require$$1$4);
 	const ioUtil = __importStar(requireIoUtil());
 	/**
 	 * Copies a file or folder.
@@ -26091,7 +26091,7 @@ function requireToolrunner () {
 	const os = __importStar(require$$0);
 	const events = __importStar(require$$4);
 	const child = __importStar(require$$2$2);
-	const path = __importStar(require$$1$5);
+	const path = __importStar(require$$1$4);
 	const io = __importStar(requireIo());
 	const ioUtil = __importStar(requireIoUtil());
 	const timers_1 = require$$6$1;
@@ -26935,7 +26935,7 @@ function requireCore () {
 		const file_command_1 = requireFileCommand();
 		const utils_1 = requireUtils$1();
 		const os = __importStar(require$$0);
-		const path = __importStar(require$$1$5);
+		const path = __importStar(require$$1$4);
 		const oidc_utils_1 = requireOidcUtils();
 		/**
 		 * The code to exit an action
@@ -27246,18 +27246,266 @@ function requireCore () {
 
 var coreExports = requireCore();
 
+// Function to convert time strings to seconds. Acceptable formats as inputs are:
+// 1. 1m 23s
+// 2. 1m 23.7s
+// 3. 43s
+// 4. 43.7s
+// 5. 700ms  CHRISM cmoe back to info when done need anything async?
+// Will add floats but return rounded to the nearest integer. No need for that level of precision.
 /**
- * Waits for a number of milliseconds.
- *
- * @param milliseconds The number of milliseconds to wait.
- * @returns Resolves with 'done!' after the wait is over.
+ * Creates balanced groups using greedy bin packing algorithm
+ * @param {Array} items - Array of objects with {name, time} properties
+ * @param {number} numGroups - Number of groups to create
+ * @returns {Array} Array of group objects with fixtures array and totalTime
  */
-async function wait(milliseconds) {
-    return new Promise((resolve) => {
-        if (isNaN(milliseconds))
-            throw new Error('milliseconds is not a number');
-        setTimeout(() => resolve('done!'), milliseconds);
-    });
+function convertToSeconds(timeStr) {
+    if (!timeStr)
+        return 0;
+    let totalSeconds = 0;
+    // Extract milliseconds if present (more specific, extract first)
+    const msMatch = timeStr.match(/(\d+(?:\.\d+)?)ms/);
+    if (msMatch) {
+        totalSeconds += parseFloat(msMatch[1]) / 1000;
+        return totalSeconds;
+    }
+    else {
+        // Extract minutes (if present)
+        const minuteMatch = timeStr.match(/(\d+)m\s/);
+        if (minuteMatch) {
+            totalSeconds += parseInt(minuteMatch[1]) * 60;
+        }
+        // Extract seconds (if present)
+        const secondMatch = timeStr.match(/(\d+(?:\.\d+)?)s/);
+        if (secondMatch) {
+            totalSeconds += parseFloat(secondMatch[1]);
+        }
+    }
+    return Math.round(totalSeconds);
+}
+//
+// 1. 1m 23s
+// 2. 1m 23.7s
+// 3. 43s
+// 4. 43.7s
+// 5. 700ms  CHRISM check this one!!
+// Will add floats but return rounded to the nearest integer. No need for that level of precision.
+/** CHRISM come back to info when done
+ * Function to convert time strings to seconds. Acceptable formats as inputs are:
+ * @param {string} data - Array of objects with {name, time} properties
+ * @param {number} numGroups - Number of groups to create
+ * @returns {Array} Array of group objects with fixtures array and totalTime
+ */
+function calculateTotalTimes(data) {
+    const totalTimes = {};
+    for (const [key, times] of Object.entries(data)) {
+        const generationSeconds = convertToSeconds(String(times['GenerationTime']));
+        const compileSeconds = convertToSeconds(String(times['CompileTime']));
+        const totalSeconds = generationSeconds + compileSeconds;
+        // Store as number
+        totalTimes[key] = totalSeconds;
+    }
+    return totalTimes;
+}
+
+/**
+ * Greedy Bin Packing Algorithm for Load Balancing
+ *
+ * This algorithm distributes items across a specified number of groups (bins)
+ * to minimize the maximum total time/weight in any single group.
+ *
+ * Strategy: Always assign the next item to the group with the smallest current total.
+ */
+/**
+ * Creates balanced groups using greedy bin packing algorithm
+ * @param {Array} items - Array of objects with {name, time} properties
+ * @param {number} numGroups - Number of groups to create
+ * @returns {Array} Array of group objects with fixtures array and totalTime
+ */
+function createBalancedGroups(items, numGroups) {
+    // CHRISM - async await?
+    // Initialize groups with empty arrays and zero total time
+    const groups = Array.from({ length: numGroups }, () => ({
+        fixtures: [],
+        totalTime: 0
+    }));
+    // Sort items by time descending (largest first)
+    // This helps achieve better balance by placing heavy items first
+    const sortedItems = [...items].sort((a, b) => b.time - a.time);
+    // For each item, add it to the group with the smallest current total time
+    for (const item of sortedItems) {
+        // Find group with minimum total time
+        let minIndex = 0;
+        let minTime = groups[0].totalTime;
+        for (let i = 1; i < groups.length; i++) {
+            if (groups[i].totalTime < minTime) {
+                minTime = groups[i].totalTime;
+                minIndex = i;
+            }
+        }
+        // Add item to the group with minimum time
+        groups[minIndex].fixtures.push(item.name);
+        groups[minIndex].totalTime += item.time;
+    }
+    return groups;
+}
+// /**
+//  * Process raw table data and consolidate by name
+//  * @param {string} rawData - Tab-separated table data
+//  * @returns {Array} Array of consolidated items with {name, time} properties
+//  */
+// function processTableData(rawData) {
+//     const nameToTotalTime = new Map();
+//     // Parse each line and accumulate times by name
+//     rawData.split('\n').forEach(line => {
+//         const [name, outputFolder, result, genTime, compileTime] = line.split('\t');
+//         const totalTime = parseTimeToSeconds(genTime) + parseTimeToSeconds(compileTime);
+//         const current = nameToTotalTime.get(name.trim()) || 0;
+//         nameToTotalTime.set(name.trim(), current + totalTime);
+//     });
+//     // Convert to sorted array (largest first for better bin packing)
+//     return Array.from(nameToTotalTime.entries())
+//         .map(([name, time]) => ({ name, time }))
+//         .sort((a, b) => b.time - a.time);
+// }
+// /**
+//  * Analyze the balance quality of the groups
+//  * @param {Array} groups - Array of group objects with totalTime property
+//  * @returns {Object} Balance statistics
+//  */
+// function analyzeBalance(groups) {
+//     const totalTimes = groups.map(g => g.totalTime);
+//     const minTime = Math.min(...totalTimes);
+//     const maxTime = Math.max(...totalTimes);
+//     const avgTime = totalTimes.reduce((a, b) => a + b, 0) / totalTimes.length;
+//     const range = maxTime - minTime;
+//     const efficiency = ((1 - range / maxTime) * 100);
+//     return {
+//         minTime,
+//         maxTime,
+//         avgTime,
+//         range,
+//         efficiency
+//     };
+// }
+// /**
+//  * Generate bash variable code from groups
+//  * @param {Array} groups - Array of group objects
+//  * @returns {string} Bash variable assignment code
+//  */
+// function generateBashCode(groups) {
+//     const bashVariable = groups.map(group => ({
+//         fixtures: group.fixtures
+//     }));
+//     return `BASH_VAR='${JSON.stringify(bashVariable)}'`;
+// }
+// // Example usage:
+// const exampleData = `item1	--	success	3m 5.4s	2m 50.9s
+// item2	--	success	3m 4.2s	3m 25.2s
+// item3	config1	failure	50.4s	1m 9.2s
+// item3	config2	success	2m 2.7s	4m 4.8s`;
+// // Process the data
+// const items = processTableData(exampleData);
+// // Create balanced groups
+// const groups = createBalancedGroups(items, 3);
+// // Analyze balance
+// const stats = analyzeBalance(groups);
+// // Generate bash code
+// const bashCode = generateBashCode(groups);
+// console.log('Processed Items:', items);
+// console.log('Balanced Groups:', groups);
+// console.log('Balance Stats:', stats);
+// console.log('Bash Code:', bashCode);
+
+async function parseDataFromSeedTestAsciiTable(input) {
+    // Strip any ANSI escape sequences when reading in data
+    const lines = input
+        .trim()
+        .replace(/\x1b\[[0-9;]*m/g, '')
+        .split('\n');
+    // Find the header line (contains column names)
+    let headerLineIndex = -1;
+    for (let i = 0; i < lines.length; i++) {
+        // let line = lines[i]
+        if (lines[i].includes('Name') &&
+            lines[i].includes('Output Folder') &&
+            lines[i].includes('Result') &&
+            lines[i].includes('Generation Time') &&
+            lines[i].includes('Compile Time')) {
+            headerLineIndex = i;
+            break;
+        }
+    }
+    if (headerLineIndex === -1) {
+        throw new Error('Could not find header row of seed test table');
+    }
+    // Parse column positions from the separator line
+    const headerLine = lines[headerLineIndex];
+    const columnPositions = [];
+    // Find column headers between two separators ( | )
+    for (let i = 0; i < headerLine.length; i++) {
+        if (headerLine[i] === '│') {
+            columnPositions.push(i);
+        }
+    }
+    // Extract header data between found column separators
+    const headers = [];
+    for (let i = 0; i < columnPositions.length - 1; i++) {
+        const start = columnPositions[i];
+        const end = columnPositions[i + 1];
+        const header = headerLine.substring(start, end).replace('│', '').trim();
+        headers.push(header);
+    }
+    console.log(`headers: ${headers}`);
+    // Find the indices of the columns we want
+    const nameIndex = headers.findIndex((h) => h === 'Name');
+    const outputFolderIndex = headers.findIndex((h) => h === 'Output Folder');
+    const generationTimeIndex = headers.findIndex((h) => h === 'Generation Time');
+    const compileTimeIndex = headers.findIndex((h) => h === 'Compile Time');
+    console.log(`nameIndex: ${nameIndex}`);
+    console.log(`outputFolderIndex: ${outputFolderIndex}`);
+    console.log(`generationTimeIndex: ${generationTimeIndex}`);
+    console.log(`compileTimeIndex: ${compileTimeIndex}`);
+    if (nameIndex === -1 ||
+        outputFolderIndex === -1 ||
+        generationTimeIndex === -1 ||
+        compileTimeIndex === -1) {
+        throw new Error('Could not find all required header columns of seed test table');
+    }
+    const results = [];
+    // Parse data rows (start after the separator line which is after the header line)
+    for (let i = headerLineIndex + 2; i < lines.length; i++) {
+        const line = lines[i];
+        // Skip lines that don't look like data rows (e.g., bottom border)
+        if (!line.includes('│') || line.startsWith('└')) {
+            continue;
+        }
+        const rowData = [];
+        // Extract each row of data (test information)
+        for (let j = 0; j < columnPositions.length - 1; j++) {
+            const start = columnPositions[j];
+            const end = columnPositions[j + 1];
+            const value = line.substring(start, end).replace('│', '').trim();
+            rowData.push(value);
+        }
+        // Error if any expected data is missing
+        if (!rowData[nameIndex])
+            throw new Error(`Missing Name data in row ${i}`);
+        if (!rowData[outputFolderIndex])
+            throw new Error(`Missing OutputFolder data in row ${i}`);
+        if (!rowData[generationTimeIndex])
+            throw new Error(`Missing GenerationTime data in row ${i}`);
+        if (!rowData[compileTimeIndex])
+            throw new Error(`Missing CompileTime data in row ${i}`);
+        const parsedRow = {
+            Name: rowData[nameIndex],
+            OutputFolder: rowData[outputFolderIndex],
+            GenerationTime: rowData[generationTimeIndex],
+            CompileTime: rowData[compileTimeIndex]
+        };
+        results.push(parsedRow);
+    }
+    return JSON.stringify(results, null, 2);
 }
 
 /**
@@ -27267,20 +27515,100 @@ async function wait(milliseconds) {
  */
 async function run() {
     try {
-        const ms = coreExports.getInput('milliseconds');
-        // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-        coreExports.debug(`Waiting ${ms} milliseconds ...`);
-        // Log the current timestamp, wait, then log the new timestamp
-        coreExports.debug(new Date().toTimeString());
-        await wait(parseInt(ms, 10));
-        coreExports.debug(new Date().toTimeString());
-        // Set outputs for other workflow steps to use
-        coreExports.setOutput('time', new Date().toTimeString());
+        coreExports.info('Starting main function!!!');
+        const seedGeneratorAlias = coreExports.getInput('seed-generator-alias');
+        const maxRunnerCount = coreExports.getInput('max-runner-count');
+        // const jsonData: string = core.getInput('json-data');
+        const seedTestLogFilePath = coreExports.getInput('seed-test-log-file-path');
+        // Start by validating inputs
+        // Validate seed-generator-alias
+        // CHRISM - does this already happen for me by getInput?
+        if (seedGeneratorAlias) {
+            coreExports.debug(`Seed generator alias: ${seedGeneratorAlias}`);
+        }
+        else {
+            coreExports.error('No seed generator alias provided');
+            return;
+        }
+        // Validate max-runner-count
+        if (maxRunnerCount) {
+            coreExports.debug(`Max runner count: ${maxRunnerCount}`);
+        }
+        else {
+            coreExports.error('No max runner count provided');
+            return;
+        }
+        // Validate output-file-path
+        if (seedTestLogFilePath) {
+            if (fs.existsSync(seedTestLogFilePath)) {
+                coreExports.debug(`Seed test log file path exists: ${seedTestLogFilePath}`);
+            }
+            else {
+                coreExports.error(`Provided seed test log file path does not exist: ${seedTestLogFilePath}`);
+                return;
+            }
+        }
+        else {
+            coreExports.error('No seed test log provided');
+            return;
+        }
+        let extractedTableOfTests = '';
+        try {
+            const fileContent = fs.readFileSync(seedTestLogFilePath, 'utf-8');
+            // console.log('File content:', fileContent);
+            const startTag = '<CLI-SEED-TEST-PARSING-TAG>';
+            const endTag = '<CLI-SEED-TEST-PARSING-TAG/>';
+            const startIndex = fileContent.indexOf(startTag);
+            const endIndex = fileContent.indexOf(endTag, startIndex + startTag.length);
+            if (startIndex !== -1 && endIndex !== -1) {
+                extractedTableOfTests = fileContent.substring(startIndex + startTag.length, endIndex);
+            }
+            else {
+                console.log(`CLI-SEED-TEST-PARSING-TAG delimiters not found in ${seedTestLogFilePath} or in incorrect order.`);
+            }
+        }
+        catch (error) {
+            console.error('Error reading seed test log file:', error);
+        }
+        console.log('Successfully parsed test table from test log file!');
+        console.debug(`extractedTableOfTests:\n${extractedTableOfTests}`);
+        let extractedJsonData = await parseDataFromSeedTestAsciiTable(extractedTableOfTests);
+        // Validate extracted json-data
+        if (!extractedJsonData) {
+            coreExports.error('No data returned from parseTimesFromSeedTestAsciiTable');
+            return;
+        }
+        let parsedJson;
+        try {
+            parsedJson = JSON.parse(extractedJsonData);
+            coreExports.debug(`JSON is parsable!`);
+        }
+        catch (parseError) {
+            coreExports.error(`Failed to parse JSON data: ${parseError}`);
+            return;
+        }
+        // Convert string time format into usable format and combine generation and compile times for a single time
+        const result = calculateTotalTimes(parsedJson); // CHRISM - async await?
+        const jsonOfTestTotalTimes = JSON.stringify(result, null, 2);
+        console.debug(`jsonOfTestTotalTimes: ${jsonOfTestTotalTimes}`);
+        console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
+        // Convert result object to array format for createBalancedGroups
+        const itemsArray = Object.entries(result).map(([name, time]) => ({
+            name: name,
+            time: time
+        }));
+        // Package the tests into balanced groups
+        const balancedGroups = createBalancedGroups(itemsArray, parseInt(maxRunnerCount));
+        const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2);
+        console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`);
+        // console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
+        // CHRISM - temporary, need to pass back to workflow to save to repo... maybe
+        // Save to file
+        fs.writeFileSync('balancedGroups.json', jsonOfBalancedGroups);
     }
     catch (error) {
-        // Fail the workflow run if an error occurs
-        if (error instanceof Error)
-            coreExports.setFailed(error.message);
+        coreExports.error(`Error: ${error}`);
+        return;
     }
 }
 

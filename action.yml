@@ -1,23 +1,34 @@
-name: The name of your action here
+name: Package Seed Test
 description: Provide a description here
-author: Your name or organization here
+author: Fern
 
-# Add your action's branding here. This will appear on the GitHub Marketplace.
+# Action branding. This will appear on the GitHub Marketplace. CHRISM - this true? repo is private
 branding:
-  icon: heart
-  color: red
+  icon: box
+  color: green
 
-# Define your inputs here.
+# Define inputs
 inputs:
-  milliseconds:
-    description: Your input description here
+  seed-generator-alias:
+    description: The alias of the seed generator to use
     required: true
-    default: '1000'
+  max-runner-count:
+    description:
+      The maximum number of runners that can be used (determines upper limit of
+      packages)
+    required: true
+  json-data:
+    description: JSON data to process
+    required: true
 
-# Define your outputs here.
+# Define outputs
 outputs:
-  time:
-    description: Your output description here
+  test-matrix:
+    description: 'Packaged test matrix'
+    # value: ${{ steps.package-test-matrices.outputs.packaged }}
+  split-tests:
+    description: 'Whether to split tests into multiple runners or run as one' #CHRISM - can we determine this in post by packages=1?
+    # value: ${{ steps.determine-test-setups.outputs.split-tests }}
 
 runs:
   using: node24
