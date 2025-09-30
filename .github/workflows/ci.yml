@@ -62,4 +62,3 @@ jobs:
           add-package-for-leftovers: "true"
           split-tests-cutoff-time-in-seconds: "2000"
           seed-test-log-file-path: "example-test-output.txt"
-
