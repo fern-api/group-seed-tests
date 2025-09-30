@@ -2,7 +2,7 @@ name: Package Seed Test
 description: Provide a description here
 author: Fern
 
-# Action branding. This will appear on the GitHub Marketplace. CHRISM - this true? repo is private
+# Action branding. This will appear on the GitHub Marketplace.
 branding:
   icon: box
   color: green
