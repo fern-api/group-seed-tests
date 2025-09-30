@@ -57,7 +57,11 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 2000
+          seed-generator-alias: "ruby-sdk-v2"
+          number-of-packages: "10"
+          add-package-for-leftovers: "true"
+          split-tests-cutoff-time-in-seconds: "2000"
+          seed-test-log-file-path: "example-test-output.txt"
 
       - name: Print Output
         id: output
