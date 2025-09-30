@@ -9,12 +9,14 @@ export async function parseDataFromSeedTestAsciiTable(
   input: string,
 ): Promise<ParsedRow[]> {
   // Strip any ANSI escape sequences when reading in data (skip that line in linter)
+  /* eslint-disable no-control-regex*/
+  // biome-ignore-start lint/suspicious/noControlCharactersInRegex: Removing ANSI escape sequences
   const lines = input
     .trim()
-    // eslint-disable-next-line no-control-regex
-    // biome-ignore lint/suspicious/noControlCharactersInRegex: Removing ANSI escape sequences
     .replace(/\x1b\[[0-9;]*m/g, "")
     .split("\n");
+  // biome-ignore-end lint/suspicious/noControlCharactersInRegex
+  /* eslint-enable no-control-regex*/
 
   // Find the header line (contains column names)
   let headerLineIndex = -1;
