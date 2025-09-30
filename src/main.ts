@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 import { calculateTotalTimes } from "./timeConversions.js";
-import { createBalancedGroups } from "./packingAlgorithm.js";
+import { createBalancedGroups } from "./groupingAlgorithm.js";
 import {
   parseDataFromSeedTestAsciiTable,
   ParsedRow,
@@ -14,61 +14,20 @@ import fs from "fs";
  */
 export async function run(): Promise<void> {
   try {
-    core.info("Starting seed test packaging");
-    const seedGeneratorAliasInput: string = core.getInput(
-      "seed-generator-alias",
-    );
-    const numberOfPackagesInput: string = core.getInput("number-of-packages");
-    const addPackageForLeftoversInput: string = core.getInput(
-      "add-package-for-leftovers",
-    );
-    const splitTestsCutoffTimeInSecondsInput: string = core.getInput(
-      "split-tests-cutoff-time-in-seconds",
-    );
+    core.info("Starting seed test grouping");
+    const numberOfGroupsInput: string = core.getInput("number-of-groups");
     const seedTestLogFilePath: string = core.getInput(
       "seed-test-log-file-path",
     );
 
     // Start by validating inputs
-    // Validate seed-generator-alias
-    if (seedGeneratorAliasInput) {
-      core.debug(`Seed generator alias: ${seedGeneratorAliasInput}`);
+    // Validate number-of-groups
+    let numberOfGroups: number = 0;
+    if (numberOfGroupsInput) {
+      numberOfGroups = parseInt(numberOfGroupsInput);
+      core.debug(`Number of groups: ${numberOfGroups}`);
     } else {
-      core.error("No seed-generator-alias provided");
-      return;
-    }
-
-    // Validate number-of-packages
-    let numberOfPackages: number = 0;
-    if (numberOfPackagesInput) {
-      numberOfPackages = parseInt(numberOfPackagesInput);
-      core.debug(`Number of packages: ${numberOfPackages}`);
-    } else {
-      core.error("No number-of-packages provided");
-      return;
-    }
-
-    // Validate add-package-for-leftovers
-    let addPackageForLeftovers: boolean = false;
-    if (addPackageForLeftoversInput) {
-      addPackageForLeftovers = addPackageForLeftoversInput === "true";
-      core.debug(`Add package for leftovers: ${addPackageForLeftovers}`);
-    } else {
-      core.error("No add-package-for-leftovers provided");
-      return;
-    }
-
-    // Validate split-tests-cutoff-time-in-seconds
-    let splitTestsCutoffTimeInSeconds: number = 0;
-    if (splitTestsCutoffTimeInSecondsInput) {
-      splitTestsCutoffTimeInSeconds = parseInt(
-        splitTestsCutoffTimeInSecondsInput,
-      );
-      core.debug(
-        `Split tests cutoff time in seconds: ${splitTestsCutoffTimeInSeconds}`,
-      );
-    } else {
-      core.error("No split-tests-cutoff-time-in-seconds provided");
+      core.error("No number-of-groups provided");
       return;
     }
 
@@ -137,32 +96,20 @@ export async function run(): Promise<void> {
       time: time,
     }));
 
-    // Package the tests into balanced groups
-    const balancedGroups = createBalancedGroups(
-      itemsArray,
-      numberOfPackages,
-      addPackageForLeftovers,
-    );
+    // Group the tests into balanced groups
+    const balancedGroups = createBalancedGroups(itemsArray, numberOfGroups);
     const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2);
     console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`);
 
-    const totalTestTime = Object.values(result).reduce(
+    const totalTestTimeSeconds = Object.values(result).reduce(
       (sum, time) => sum + time,
       0,
     );
-    const totalTestTimeRounded = Math.round(totalTestTime);
-    console.debug(
-      `Total test time: ${totalTestTimeRounded} seconds (rounded). Split time cutoff: ${splitTestsCutoffTimeInSeconds} seconds.`,
-    );
-
-    const shouldSplitTests =
-      totalTestTimeRounded > splitTestsCutoffTimeInSeconds;
+    const totalTestTimeRoundedSeconds = Math.round(totalTestTimeSeconds);
 
     const fileContents = {
-      "total-test-time": totalTestTimeRounded,
-      "split-cutoff-time": splitTestsCutoffTimeInSeconds,
-      "split-tests": shouldSplitTests,
-      packages: JSON.parse(jsonOfBalancedGroups),
+      "total-test-time-seconds": totalTestTimeRoundedSeconds,
+      groups: JSON.parse(jsonOfBalancedGroups),
     };
 
     const fileContentsAsJson = JSON.stringify(fileContents, null, 2);

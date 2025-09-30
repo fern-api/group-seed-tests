@@ -1,17 +1,17 @@
 {
-  "name": "package-seed-test",
+  "name": "group-seed-tests",
   "description": "GitHub Actions TypeScript template",
   "version": "0.0.0",
   "author": "",
   "type": "module",
   "private": true,
-  "homepage": "https://github.com/fern-api/package-seed-test",
+  "homepage": "https://github.com/fern-api/group-seed-test",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fern-api/package-seed-test.git"
+    "url": "git+https://github.com/fern-api/group-seed-tests.git"
   },
   "bugs": {
-    "url": "https://github.com/fern-api/package-seed-test/issues"
+    "url": "https://github.com/fern-api/group-seed-tests/issues"
   },
   "keywords": [
     "actions"

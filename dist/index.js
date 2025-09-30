@@ -27296,18 +27296,18 @@ function calculateTotalTimes(data) {
 }
 
 /**
- * Greedy Bin Packing Algorithm for Load Balancing
+ * Greedy Bin Grouping Algorithm for Load Balancing
  *
  * This algorithm distributes items across a specified number of groups (bins)
  * to minimize the maximum total time/weight in any single group.
  *
  * Strategy: Always assign the next item to the group with the smallest current total.
  */
-function createBalancedGroups(items, numGroups, addPackageForLeftovers) {
+function createBalancedGroups(items, numGroups) {
     // Initialize groups with empty arrays and zero total time
     const groups = Array.from({ length: numGroups }, () => ({
         fixtures: [],
-        packageTotalTime: 0,
+        groupTotalTime: 0,
     }));
     // Sort items by time descending (largest first)
     // This helps achieve better balance by placing heavy items first
@@ -27316,23 +27316,16 @@ function createBalancedGroups(items, numGroups, addPackageForLeftovers) {
     for (const item of sortedItems) {
         // Find group with minimum total time
         let minIndex = 0;
-        let minTime = groups[0].packageTotalTime;
+        let minTime = groups[0].groupTotalTime;
         for (let i = 1; i < groups.length; i++) {
-            if (groups[i].packageTotalTime < minTime) {
-                minTime = groups[i].packageTotalTime;
+            if (groups[i].groupTotalTime < minTime) {
+                minTime = groups[i].groupTotalTime;
                 minIndex = i;
             }
         }
         // Add item to the group with minimum time
         groups[minIndex].fixtures.push(item.name);
-        groups[minIndex].packageTotalTime += item.time;
-    }
-    // Add a package for leftovers if addPackageForLeftovers is true. This will run any new test added since the last run of this packager.
-    if (addPackageForLeftovers) {
-        groups.push({
-            fixtures: ["leftovers"],
-            packageTotalTime: 0,
-        });
+        groups[minIndex].groupTotalTime += item.time;
     }
     return groups;
 }
@@ -27444,49 +27437,18 @@ async function parseDataFromSeedTestAsciiTable(input) {
  */
 async function run() {
     try {
-        coreExports.info("Starting seed test packaging");
-        const seedGeneratorAliasInput = coreExports.getInput("seed-generator-alias");
-        const numberOfPackagesInput = coreExports.getInput("number-of-packages");
-        const addPackageForLeftoversInput = coreExports.getInput("add-package-for-leftovers");
-        const splitTestsCutoffTimeInSecondsInput = coreExports.getInput("split-tests-cutoff-time-in-seconds");
+        coreExports.info("Starting seed test grouping");
+        const numberOfGroupsInput = coreExports.getInput("number-of-groups");
         const seedTestLogFilePath = coreExports.getInput("seed-test-log-file-path");
         // Start by validating inputs
-        // Validate seed-generator-alias
-        if (seedGeneratorAliasInput) {
-            coreExports.debug(`Seed generator alias: ${seedGeneratorAliasInput}`);
+        // Validate number-of-groups
+        let numberOfGroups = 0;
+        if (numberOfGroupsInput) {
+            numberOfGroups = parseInt(numberOfGroupsInput);
+            coreExports.debug(`Number of groups: ${numberOfGroups}`);
         }
         else {
-            coreExports.error("No seed-generator-alias provided");
-            return;
-        }
-        // Validate number-of-packages
-        let numberOfPackages = 0;
-        if (numberOfPackagesInput) {
-            numberOfPackages = parseInt(numberOfPackagesInput);
-            coreExports.debug(`Number of packages: ${numberOfPackages}`);
-        }
-        else {
-            coreExports.error("No number-of-packages provided");
-            return;
-        }
-        // Validate add-package-for-leftovers
-        let addPackageForLeftovers = false;
-        if (addPackageForLeftoversInput) {
-            addPackageForLeftovers = addPackageForLeftoversInput === "true";
-            coreExports.debug(`Add package for leftovers: ${addPackageForLeftovers}`);
-        }
-        else {
-            coreExports.error("No add-package-for-leftovers provided");
-            return;
-        }
-        // Validate split-tests-cutoff-time-in-seconds
-        let splitTestsCutoffTimeInSeconds = 0;
-        if (splitTestsCutoffTimeInSecondsInput) {
-            splitTestsCutoffTimeInSeconds = parseInt(splitTestsCutoffTimeInSecondsInput);
-            coreExports.debug(`Split tests cutoff time in seconds: ${splitTestsCutoffTimeInSeconds}`);
-        }
-        else {
-            coreExports.error("No split-tests-cutoff-time-in-seconds provided");
+            coreExports.error("No number-of-groups provided");
             return;
         }
         // Validate seed-test-log-file-path
@@ -27540,19 +27502,15 @@ async function run() {
             name: name,
             time: time,
         }));
-        // Package the tests into balanced groups
-        const balancedGroups = createBalancedGroups(itemsArray, numberOfPackages, addPackageForLeftovers);
+        // Group the tests into balanced groups
+        const balancedGroups = createBalancedGroups(itemsArray, numberOfGroups);
         const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2);
         console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`);
-        const totalTestTime = Object.values(result).reduce((sum, time) => sum + time, 0);
-        const totalTestTimeRounded = Math.round(totalTestTime);
-        console.debug(`Total test time: ${totalTestTimeRounded} seconds (rounded). Split time cutoff: ${splitTestsCutoffTimeInSeconds} seconds.`);
-        const shouldSplitTests = totalTestTimeRounded > splitTestsCutoffTimeInSeconds;
+        const totalTestTimeSeconds = Object.values(result).reduce((sum, time) => sum + time, 0);
+        const totalTestTimeRoundedSeconds = Math.round(totalTestTimeSeconds);
         const fileContents = {
-            "total-test-time": totalTestTimeRounded,
-            "split-cutoff-time": splitTestsCutoffTimeInSeconds,
-            "split-tests": shouldSplitTests,
-            packages: JSON.parse(jsonOfBalancedGroups),
+            "total-test-time-seconds": totalTestTimeRoundedSeconds,
+            groups: JSON.parse(jsonOfBalancedGroups),
         };
         const fileContentsAsJson = JSON.stringify(fileContents, null, 2);
         console.debug(`fileContentsAsJson: ${fileContentsAsJson}`);
