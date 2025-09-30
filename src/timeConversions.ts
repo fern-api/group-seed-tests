@@ -4,7 +4,7 @@ import { ParsedRow } from "./seedTestLogParser.js";
 // 2. 1m 23.7s
 // 3. 43s
 // 4. 43.7s
-// 5. 700ms  CHRISM cmoe back to info when done need anything async?
+// 5. 700ms
 // Will add floats but return rounded to the nearest integer. No need for that level of precision.
 /**
  * Creates balanced groups using greedy bin packing algorithm
