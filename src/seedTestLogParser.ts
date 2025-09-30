@@ -12,6 +12,7 @@ export async function parseDataFromSeedTestAsciiTable(
   const lines = input
     .trim()
     // eslint-disable-next-line no-control-regex
+    // biome-ignore lint/suspicious/noControlCharactersInRegex: Removing ANSI escape sequences
     .replace(/\x1b\[[0-9;]*m/g, "")
     .split("\n");
 
@@ -59,10 +60,10 @@ export async function parseDataFromSeedTestAsciiTable(
   console.log(`headers: ${headers}`);
 
   // Find the indices of the columns we want
-  const nameIndex = headers.findIndex((h) => h === "Name");
-  const outputFolderIndex = headers.findIndex((h) => h === "Output Folder");
-  const generationTimeIndex = headers.findIndex((h) => h === "Generation Time");
-  const compileTimeIndex = headers.findIndex((h) => h === "Compile Time");
+  const nameIndex = headers.indexOf("Name");
+  const outputFolderIndex = headers.indexOf("Output Folder");
+  const generationTimeIndex = headers.indexOf("Generation Time");
+  const compileTimeIndex = headers.indexOf("Compile Time");
 
   console.log(`nameIndex: ${nameIndex}`);
   console.log(`outputFolderIndex: ${outputFolderIndex}`);

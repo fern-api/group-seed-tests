@@ -1,11 +1,9 @@
 import * as core from "@actions/core";
-import { calculateTotalTimes } from "./timeConversions.js";
-import { createBalancedGroups } from "./groupingAlgorithm.js";
-import {
-  parseDataFromSeedTestAsciiTable,
-  ParsedRow,
-} from "./seedTestLogParser.js";
 import fs from "fs";
+import { createBalancedGroups } from "./groupingAlgorithm.js";
+import type { ParsedRow } from "./seedTestLogParser.js";
+import { parseDataFromSeedTestAsciiTable } from "./seedTestLogParser.js";
+import { calculateTotalTimes } from "./timeConversions.js";
 
 /**
  * The main function for the action.
