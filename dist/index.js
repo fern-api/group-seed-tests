@@ -27283,24 +27283,11 @@ function convertToSeconds(timeStr) {
     console.log(`Given String: ${timeStr}. Converted to seconds: ${totalSeconds}`);
     return Math.round(totalSeconds);
 }
-//
-// 1. 1m 23s
-// 2. 1m 23.7s
-// 3. 43s
-// 4. 43.7s
-// 5. 700ms  CHRISM check this one!!
-// Will add floats but return rounded to the nearest integer. No need for that level of precision.
-/** CHRISM come back to info when done
- * Function to convert time strings to seconds. Acceptable formats as inputs are:
- * @param {string} data - Array of objects with {name, time} properties
- * @param {number} numGroups - Number of groups to create
- * @returns {Array} Array of group objects with fixtures array and totalTime
- */
 function calculateTotalTimes(data) {
     const totalTimes = {};
     for (const item of data) {
-        const generationSeconds = convertToSeconds(String(item['GenerationTime']));
-        const compileSeconds = convertToSeconds(String(item['CompileTime']));
+        const generationSeconds = convertToSeconds(String(item["GenerationTime"]));
+        const compileSeconds = convertToSeconds(String(item["CompileTime"]));
         const totalSeconds = generationSeconds + compileSeconds;
         // Store using the Name as the key
         totalTimes[item.Name] = totalSeconds;
@@ -27316,18 +27303,11 @@ function calculateTotalTimes(data) {
  *
  * Strategy: Always assign the next item to the group with the smallest current total.
  */
-/**
- * Creates balanced groups using greedy bin packing algorithm
- * @param {Array} items - Array of objects with {name, time} properties
- * @param {number} numGroups - Number of groups to create
- * @returns {Array} Array of group objects with fixtures array and totalTime
- */
-function createBalancedGroups(items, numGroups) {
-    // CHRISM - async await?
+function createBalancedGroups(items, numGroups, addPackageForLeftovers) {
     // Initialize groups with empty arrays and zero total time
     const groups = Array.from({ length: numGroups }, () => ({
         fixtures: [],
-        packageTotalTime: 0
+        packageTotalTime: 0,
     }));
     // Sort items by time descending (largest first)
     // This helps achieve better balance by placing heavy items first
@@ -27347,104 +27327,44 @@ function createBalancedGroups(items, numGroups) {
         groups[minIndex].fixtures.push(item.name);
         groups[minIndex].packageTotalTime += item.time;
     }
+    // Add a package for leftovers if addPackageForLeftovers is true. This will run any new test added since the last run of this packager.
+    if (addPackageForLeftovers) {
+        groups.push({
+            fixtures: ["leftovers"],
+            packageTotalTime: 0,
+        });
+    }
     return groups;
 }
-// /**
-//  * Process raw table data and consolidate by name
-//  * @param {string} rawData - Tab-separated table data
-//  * @returns {Array} Array of consolidated items with {name, time} properties
-//  */
-// function processTableData(rawData) {
-//     const nameToTotalTime = new Map();
-//     // Parse each line and accumulate times by name
-//     rawData.split('\n').forEach(line => {
-//         const [name, outputFolder, result, genTime, compileTime] = line.split('\t');
-//         const totalTime = parseTimeToSeconds(genTime) + parseTimeToSeconds(compileTime);
-//         const current = nameToTotalTime.get(name.trim()) || 0;
-//         nameToTotalTime.set(name.trim(), current + totalTime);
-//     });
-//     // Convert to sorted array (largest first for better bin packing)
-//     return Array.from(nameToTotalTime.entries())
-//         .map(([name, time]) => ({ name, time }))
-//         .sort((a, b) => b.time - a.time);
-// }
-// /**
-//  * Analyze the balance quality of the groups
-//  * @param {Array} groups - Array of group objects with totalTime property
-//  * @returns {Object} Balance statistics
-//  */
-// function analyzeBalance(groups) {
-//     const totalTimes = groups.map(g => g.totalTime);
-//     const minTime = Math.min(...totalTimes);
-//     const maxTime = Math.max(...totalTimes);
-//     const avgTime = totalTimes.reduce((a, b) => a + b, 0) / totalTimes.length;
-//     const range = maxTime - minTime;
-//     const efficiency = ((1 - range / maxTime) * 100);
-//     return {
-//         minTime,
-//         maxTime,
-//         avgTime,
-//         range,
-//         efficiency
-//     };
-// }
-// /**
-//  * Generate bash variable code from groups
-//  * @param {Array} groups - Array of group objects
-//  * @returns {string} Bash variable assignment code
-//  */
-// function generateBashCode(groups) {
-//     const bashVariable = groups.map(group => ({
-//         fixtures: group.fixtures
-//     }));
-//     return `BASH_VAR='${JSON.stringify(bashVariable)}'`;
-// }
-// // Example usage:
-// const exampleData = `item1	--	success	3m 5.4s	2m 50.9s
-// item2	--	success	3m 4.2s	3m 25.2s
-// item3	config1	failure	50.4s	1m 9.2s
-// item3	config2	success	2m 2.7s	4m 4.8s`;
-// // Process the data
-// const items = processTableData(exampleData);
-// // Create balanced groups
-// const groups = createBalancedGroups(items, 3);
-// // Analyze balance
-// const stats = analyzeBalance(groups);
-// // Generate bash code
-// const bashCode = generateBashCode(groups);
-// console.log('Processed Items:', items);
-// console.log('Balanced Groups:', groups);
-// console.log('Balance Stats:', stats);
-// console.log('Bash Code:', bashCode);
 
 async function parseDataFromSeedTestAsciiTable(input) {
     // Strip any ANSI escape sequences when reading in data
     const lines = input
         .trim()
-        .replace(/\x1b\[[0-9;]*m/g, '')
-        .split('\n');
+        .replace(/\x1b\[[0-9;]*m/g, "")
+        .split("\n");
     // Find the header line (contains column names)
     let headerLineIndex = -1;
     for (let i = 0; i < lines.length; i++) {
         // let line = lines[i]
-        if (lines[i].includes('Name') &&
-            lines[i].includes('Output Folder') &&
-            lines[i].includes('Result') &&
-            lines[i].includes('Generation Time') &&
-            lines[i].includes('Compile Time')) {
+        if (lines[i].includes("Name") &&
+            lines[i].includes("Output Folder") &&
+            lines[i].includes("Result") &&
+            lines[i].includes("Generation Time") &&
+            lines[i].includes("Compile Time")) {
             headerLineIndex = i;
             break;
         }
     }
     if (headerLineIndex === -1) {
-        throw new Error('Could not find header row of seed test table');
+        throw new Error("Could not find header row of seed test table");
     }
     // Parse column positions from the separator line
     const headerLine = lines[headerLineIndex];
     const columnPositions = [];
     // Find column headers between two separators ( | )
     for (let i = 0; i < headerLine.length; i++) {
-        if (headerLine[i] === '│') {
+        if (headerLine[i] === "│") {
             columnPositions.push(i);
         }
     }
@@ -27453,15 +27373,15 @@ async function parseDataFromSeedTestAsciiTable(input) {
     for (let i = 0; i < columnPositions.length - 1; i++) {
         const start = columnPositions[i];
         const end = columnPositions[i + 1];
-        const header = headerLine.substring(start, end).replace('│', '').trim();
+        const header = headerLine.substring(start, end).replace("│", "").trim();
         headers.push(header);
     }
     console.log(`headers: ${headers}`);
     // Find the indices of the columns we want
-    const nameIndex = headers.findIndex((h) => h === 'Name');
-    const outputFolderIndex = headers.findIndex((h) => h === 'Output Folder');
-    const generationTimeIndex = headers.findIndex((h) => h === 'Generation Time');
-    const compileTimeIndex = headers.findIndex((h) => h === 'Compile Time');
+    const nameIndex = headers.findIndex((h) => h === "Name");
+    const outputFolderIndex = headers.findIndex((h) => h === "Output Folder");
+    const generationTimeIndex = headers.findIndex((h) => h === "Generation Time");
+    const compileTimeIndex = headers.findIndex((h) => h === "Compile Time");
     console.log(`nameIndex: ${nameIndex}`);
     console.log(`outputFolderIndex: ${outputFolderIndex}`);
     console.log(`generationTimeIndex: ${generationTimeIndex}`);
@@ -27470,14 +27390,14 @@ async function parseDataFromSeedTestAsciiTable(input) {
         outputFolderIndex === -1 ||
         generationTimeIndex === -1 ||
         compileTimeIndex === -1) {
-        throw new Error('Could not find all required header columns of seed test table');
+        throw new Error("Could not find all required header columns of seed test table");
     }
     const results = [];
     // Parse data rows (start after the separator line which is after the header line)
     for (let i = headerLineIndex + 2; i < lines.length; i++) {
         const line = lines[i];
         // Skip lines that don't look like data rows (e.g., bottom border)
-        if (!line.includes('│') || line.startsWith('└')) {
+        if (!line.includes("│") || line.startsWith("└")) {
             continue;
         }
         const rowData = [];
@@ -27485,7 +27405,7 @@ async function parseDataFromSeedTestAsciiTable(input) {
         for (let j = 0; j < columnPositions.length - 1; j++) {
             const start = columnPositions[j];
             const end = columnPositions[j + 1];
-            const value = line.substring(start, end).replace('│', '').trim();
+            const value = line.substring(start, end).replace("│", "").trim();
             rowData.push(value);
         }
         // Note: Will eventually add back errors for missing compile and generation times,
@@ -27500,20 +27420,20 @@ async function parseDataFromSeedTestAsciiTable(input) {
         //   throw new Error(`Missing GenerationTime data in row ${i}`)
         // if (!rowData[compileTimeIndex])
         //   throw new Error(`Missing CompileTime data in row ${i}`)
-        // Combo the output folder name if it exists
-        const fullTestName = rowData[outputFolderIndex] !== '--'
+        // Combo the name with the output folder name if it exists, separated by a colon
+        const fullTestName = rowData[outputFolderIndex] !== "--"
             ? `${rowData[nameIndex]}:${rowData[outputFolderIndex]}`
             : rowData[nameIndex];
         const parsedRow = {
             Name: fullTestName,
             GenerationTime: rowData[generationTimeIndex]
                 ? rowData[generationTimeIndex]
-                : '0',
-            CompileTime: rowData[compileTimeIndex] ? rowData[compileTimeIndex] : '0'
+                : "0",
+            CompileTime: rowData[compileTimeIndex] ? rowData[compileTimeIndex] : "0",
         };
         results.push(parsedRow);
     }
-    return results; //JSON.stringify(results, null, 2)
+    return results;
 }
 
 /**
@@ -27523,99 +27443,119 @@ async function parseDataFromSeedTestAsciiTable(input) {
  */
 async function run() {
     try {
-        coreExports.info('Starting main function!!!');
-        const seedGeneratorAlias = coreExports.getInput('seed-generator-alias');
-        const maxRunnerCount = coreExports.getInput('max-runner-count');
-        // const jsonData: string = core.getInput('json-data');
-        const splitTestsCutoffTimeInSeconds = coreExports.getInput('split-tests-cutoff-time-in-seconds');
-        const seedTestLogFilePath = coreExports.getInput('seed-test-log-file-path');
+        coreExports.info("Starting seed test packaging");
+        const seedGeneratorAliasInput = coreExports.getInput("seed-generator-alias");
+        const numberOfPackagesInput = coreExports.getInput("number-of-packages");
+        const addPackageForLeftoversInput = coreExports.getInput("add-package-for-leftovers");
+        const splitTestsCutoffTimeInSecondsInput = coreExports.getInput("split-tests-cutoff-time-in-seconds");
+        const seedTestLogFilePath = coreExports.getInput("seed-test-log-file-path");
         // Start by validating inputs
         // Validate seed-generator-alias
-        // CHRISM - does this already happen for me by getInput?
-        if (seedGeneratorAlias) {
-            coreExports.debug(`Seed generator alias: ${seedGeneratorAlias}`);
+        if (seedGeneratorAliasInput) {
+            coreExports.debug(`Seed generator alias: ${seedGeneratorAliasInput}`);
         }
         else {
-            coreExports.error('No seed generator alias provided');
+            coreExports.error("No seed-generator-alias provided");
             return;
         }
-        // Validate max-runner-count
-        if (maxRunnerCount) {
-            coreExports.debug(`Max runner count: ${maxRunnerCount}`);
+        // Validate number-of-packages
+        let numberOfPackages = 0;
+        if (numberOfPackagesInput) {
+            numberOfPackages = parseInt(numberOfPackagesInput);
+            coreExports.debug(`Number of packages: ${numberOfPackages}`);
         }
         else {
-            coreExports.error('No max runner count provided');
+            coreExports.error("No number-of-packages provided");
             return;
         }
-        // Validate output-file-path
+        // Validate add-package-for-leftovers
+        let addPackageForLeftovers = false;
+        if (addPackageForLeftoversInput) {
+            addPackageForLeftovers = addPackageForLeftoversInput === "true";
+            coreExports.debug(`Add package for leftovers: ${addPackageForLeftovers}`);
+        }
+        else {
+            coreExports.error("No add-package-for-leftovers provided");
+            return;
+        }
+        // Validate split-tests-cutoff-time-in-seconds
+        let splitTestsCutoffTimeInSeconds = 0;
+        if (splitTestsCutoffTimeInSecondsInput) {
+            splitTestsCutoffTimeInSeconds = parseInt(splitTestsCutoffTimeInSecondsInput);
+            coreExports.debug(`Split tests cutoff time in seconds: ${splitTestsCutoffTimeInSeconds}`);
+        }
+        else {
+            coreExports.error("No split-tests-cutoff-time-in-seconds provided");
+            return;
+        }
+        // Validate seed-test-log-file-path
         if (seedTestLogFilePath) {
             if (require$$1.existsSync(seedTestLogFilePath)) {
                 coreExports.debug(`Seed test log file path exists: ${seedTestLogFilePath}`);
             }
             else {
-                coreExports.error(`Provided seed test log file path does not exist: ${seedTestLogFilePath}`);
+                coreExports.error(`Provided seed-test-log-file-path does not exist: ${seedTestLogFilePath}`);
                 return;
             }
         }
         else {
-            coreExports.error('No seed test log provided');
+            coreExports.error("No seed test log provided");
             return;
         }
-        let extractedTableOfTests = '';
+        // Parse table of tests and times out from seed test log file
+        let extractedTableOfTests = "";
         try {
-            const fileContent = require$$1.readFileSync(seedTestLogFilePath, 'utf-8');
-            // console.log('File content:', fileContent);
-            // const startTag: string = '<CLI-SEED-TEST-PARSING-TAG>'
-            // const endTag: string = '<CLI-SEED-TEST-PARSING-TAG/>'
-            const startTag = '┌──────';
-            const endTag = 'test cases'; // CHRISM - just for testing but should add tags
+            const fileContent = require$$1.readFileSync(seedTestLogFilePath, "utf-8");
+            // TODO FER-6948: make parsing more robust with tags like mentioned in ticket
+            const startTag = "┌──────";
+            const endTag = "test cases";
             const startIndex = fileContent.indexOf(startTag);
             const endIndex = fileContent.indexOf(endTag, startIndex + startTag.length);
             if (startIndex !== -1 && endIndex !== -1) {
                 extractedTableOfTests = fileContent.substring(startIndex + startTag.length, endIndex);
             }
             else {
-                console.log(`CLI-SEED-TEST-PARSING-TAG delimiters not found in ${seedTestLogFilePath} or in incorrect order.`);
+                console.log(`Table parsing delimiters not found in ${seedTestLogFilePath} or in incorrect order.`);
             }
         }
         catch (error) {
-            console.error('Error reading seed test log file:', error);
+            console.error("Error reading seed test log file:", error);
         }
-        console.log('Successfully parsed test table from test log file!');
-        // console.debug(`extractedTableOfTests:\n${extractedTableOfTests}`)
+        console.log("Successfully parsed test table from test log file!");
+        // Parse row data from table of tests and times
         let extractedJsonData = await parseDataFromSeedTestAsciiTable(extractedTableOfTests);
         // Validate extracted json-data
         if (!extractedJsonData) {
-            coreExports.error('No data returned from parseTimesFromSeedTestAsciiTable');
+            coreExports.error("No data returned from parseTimesFromSeedTestAsciiTable");
             return;
         }
         // Convert string time format into usable format and combine generation and compile times for a single time
-        const result = calculateTotalTimes(extractedJsonData); // CHRISM - async await?
+        const result = calculateTotalTimes(extractedJsonData);
         const jsonOfTestTotalTimes = JSON.stringify(result, null, 2);
         console.debug(`jsonOfTestTotalTimes: ${jsonOfTestTotalTimes}`);
         console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
         // Convert result object to array format for createBalancedGroups
         const itemsArray = Object.entries(result).map(([name, time]) => ({
             name: name,
-            time: time
+            time: time,
         }));
         // Package the tests into balanced groups
-        const balancedGroups = createBalancedGroups(itemsArray, parseInt(maxRunnerCount));
+        const balancedGroups = createBalancedGroups(itemsArray, numberOfPackages, addPackageForLeftovers);
         const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2);
         console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`);
         const totalTestTime = Object.values(result).reduce((sum, time) => sum + time, 0);
         const totalTestTimeRounded = Math.round(totalTestTime);
         console.debug(`Total test time: ${totalTestTimeRounded} seconds (rounded). Split time cutoff: ${splitTestsCutoffTimeInSeconds} seconds.`);
-        const shouldSplitTests = totalTestTimeRounded > parseInt(splitTestsCutoffTimeInSeconds);
+        const shouldSplitTests = totalTestTimeRounded > splitTestsCutoffTimeInSeconds;
         const fileContents = {
-            'total-test-time': totalTestTimeRounded,
-            'split-cutoff-time': parseInt(splitTestsCutoffTimeInSeconds),
-            'split-tests': shouldSplitTests,
-            packages: JSON.parse(jsonOfBalancedGroups)
+            "total-test-time": totalTestTimeRounded,
+            "split-cutoff-time": splitTestsCutoffTimeInSeconds,
+            "split-tests": shouldSplitTests,
+            packages: JSON.parse(jsonOfBalancedGroups),
         };
         const fileContentsAsJson = JSON.stringify(fileContents, null, 2);
         console.debug(`fileContentsAsJson: ${fileContentsAsJson}`);
-        coreExports.setOutput('json-file-contents', fileContentsAsJson);
+        coreExports.setOutput("json-file-contents", fileContentsAsJson);
     }
     catch (error) {
         coreExports.error(`Error: ${error}`);

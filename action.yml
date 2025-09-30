@@ -12,10 +12,11 @@ inputs:
   seed-generator-alias:
     description: The alias of the seed generator to use
     required: true
-  max-runner-count:
-    description:
-      The maximum number of runners that can be used (determines upper limit of
-      packages)
+  number-of-packages:
+    description: The number of packages to group the tests into (Note - may have one additional package depending on add-package-for-leftovers setting)
+    required: true
+  add-package-for-leftovers:
+    description: Whether to add a package for leftover tests or not.
     required: true
   split-tests-cutoff-time-in-seconds:
     description: The cutoff time in seconds to split tests into multiple runners
@@ -27,7 +28,7 @@ inputs:
 # Define outputs
 outputs:
   json-file-contents:
-    description: 'All information in JSON format for packaging tests'
+    description: "All information in JSON format for packaging tests"
 
 runs:
   using: node24

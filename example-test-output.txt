@@ -1,0 +1,911 @@
+
+> fern@ seed:local /home/runner/work/fern/fern
+> pnpm --filter @fern-api/seed-cli dist:cli && node --enable-source-maps packages/seed/dist/cli.cjs "test" "--generator" "pydantic" "--parallel" "16" "--allow-unexpected-failures"
+
+
+> @fern-api/seed-cli@0.0.0 dist:cli /home/runner/work/fern/fern/packages/seed
+> pnpm compile && node build.cjs
+
+
+> @fern-api/seed-cli@0.0.0 compile /home/runner/work/fern/fern/packages/seed
+> tsc --build
+
+[34mCLI[39m Building entry: src/cli.ts
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.5.0
+[34mCLI[39m Target: esnext
+[34mCJS[39m Build start
+[32mCJS[39m [1mdist/cli.cjs     [22m[32m58.60 MB[39m
+[32mCJS[39m [1mdist/cli.cjs.map [22m[32m87.97 MB[39m
+[32mCJS[39m ⚡️ Build success in 9030ms
++ bash /tmp/tmp-4325-JqiOiEjnYprY
+
+> fern@ fern:build /home/runner/work/fern/fern
+> cross-env POSTHOG_API_KEY="" pnpm --filter @fern-api/cli dist:cli:prod && echo 'Run node --enable-source-maps packages/cli/cli/dist/prod/cli.cjs'
+
+
+> @fern-api/cli@0.0.0 dist:cli:prod /home/runner/work/fern/fern/packages/cli/cli
+> pnpm compile && node build.prod.cjs
+
+
+> @fern-api/cli@0.0.0 compile /home/runner/work/fern/fern/packages/cli/cli
+> tsc --build
+
+[34mCLI[39m Building entry: src/cli.ts
+[34mCLI[39m Using tsconfig: tsconfig.json
+[34mCLI[39m tsup v8.5.0
+[34mCLI[39m Target: esnext
+[34mCJS[39m Build start
+[32mCJS[39m [1mdist/prod/cli.cjs     [22m[32m37.04 MB[39m
+[32mCJS[39m [1mdist/prod/cli.cjs.map [22m[32m119.95 MB[39m
+[32mCJS[39m ⚡️ Build success in 15560ms
+Run node --enable-source-maps packages/cli/cli/dist/prod/cli.cjs
+[pydantic:version]:  Running generator...
+[pydantic:version]:  Started.
+[pydantic:version]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:version-no-default]:  Running generator...
+[pydantic:version-no-default]:  Started.
+[pydantic:version-no-default]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:query-parameters-openapi-as-objects]:  Running generator...
+[pydantic:query-parameters-openapi-as-objects]:  Started.
+[pydantic:query-parameters-openapi-as-objects]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:query-parameters-openapi]:  Running generator...
+[pydantic:query-parameters-openapi]:  Started.
+[pydantic:query-parameters-openapi]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:accept-header]:  Running generator...
+[pydantic:accept-header]:  Started.
+[pydantic:accept-header]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:alias]:  Running generator...
+[pydantic:alias]:  Started.
+[pydantic:alias]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:alias-extends:no-custom-config]:  Running generator...
+[pydantic:alias-extends:no-custom-config]:  Started.
+[pydantic:alias-extends:no-custom-config]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:alias-extends:no-inheritance-for-extended-models]:  Running generator...
+[pydantic:alias-extends:no-inheritance-for-extended-models]:  Started.
+[pydantic:alias-extends:no-inheritance-for-extended-models]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:api-wide-base-path]:  Running generator...
+[pydantic:api-wide-base-path]:  Started.
+[pydantic:api-wide-base-path]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:auth-environment-variables]:  Running generator...
+[pydantic:auth-environment-variables]:  Started.
+[pydantic:auth-environment-variables]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:bearer-token-environment-variable]:  Running generator...
+[pydantic:bearer-token-environment-variable]:  Started.
+[pydantic:bearer-token-environment-variable]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:bytes-download]:  Running generator...
+[pydantic:bytes-download]:  Started.
+[pydantic:bytes-download]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:bytes-upload]:  Running generator...
+[pydantic:bytes-upload]:  Started.
+[pydantic:bytes-upload]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:content-type]:  Running generator...
+[pydantic:content-type]:  Started.
+[pydantic:content-type]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:extends]:  Running generator...
+[pydantic:extends]:  Started.
+[pydantic:extends]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:file-download:no-custom-config]:  Running generator...
+[pydantic:file-download:no-custom-config]:  Started.
+[pydantic:file-download:no-custom-config]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:version-no-default]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:version]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:query-parameters-openapi-as-objects]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:query-parameters-openapi]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:accept-header]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:alias]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:alias-extends:no-custom-config]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:alias-extends:no-inheritance-for-extended-models]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:api-wide-base-path]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:bytes-download]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:auth-environment-variables]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:bearer-token-environment-variable]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:bytes-upload]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:file-download:no-custom-config]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:extends]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:content-type]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:version-no-default]:  Generator logs here: /tmp/tmp-4325-9BudtnTXJLu1
+[pydantic:version]:  Generator logs here: /tmp/tmp-4325-ao26hKMbxXWY
+[pydantic:accept-header]:  Generator logs here: /tmp/tmp-4325-Wz7uSLCcasqn
+[pydantic:auth-environment-variables]:  Generator logs here: /tmp/tmp-4325-mwhQxZKvqZtm
+[pydantic:file-download:no-custom-config]:  Generator logs here: /tmp/tmp-4325-8TowHRuln5vn
+[pydantic:bytes-upload]:  Generator logs here: /tmp/tmp-4325-jwhjNTSqk85u
+[pydantic:query-parameters-openapi]:  Generator logs here: /tmp/tmp-4325-rMb5XZ0U5nJA
+[pydantic:query-parameters-openapi-as-objects]:  Generator logs here: /tmp/tmp-4325-EQw1eyww30O9
+[pydantic:alias]:  Generator logs here: /tmp/tmp-4325-L5IJPCfyvdOV
+[pydantic:alias-extends:no-custom-config]:  Generator logs here: /tmp/tmp-4325-CvwtBhhZsJml
+[pydantic:alias-extends:no-inheritance-for-extended-models]:  Generator logs here: /tmp/tmp-4325-dqf5HAidLdRv
+[pydantic:api-wide-base-path]:  Generator logs here: /tmp/tmp-4325-VqifmpHPtnXX
+[pydantic:bytes-download]:  Generator logs here: /tmp/tmp-4325-9yVuHhaH8V6X
+[pydantic:bearer-token-environment-variable]:  Generator logs here: /tmp/tmp-4325-w5gzC9079PUI
+[pydantic:extends]:  Generator logs here: /tmp/tmp-4325-M63AxOnLsuHQ
+[pydantic:content-type]:  Generator logs here: /tmp/tmp-4325-32MdCh7Me1f2
+[pydantic:version]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/version
+[pydantic:version]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:version]:  Finished.
+[pydantic:file-download:no-inheritance-for-extended-models]:  Running generator...
+[pydantic:file-download:no-inheritance-for-extended-models]:  Started.
+[pydantic:file-download:no-inheritance-for-extended-models]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:version-no-default]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/version-no-default
+[pydantic:version-no-default]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:version-no-default]:  Finished.
+[pydantic:file-upload]:  Running generator...
+[pydantic:file-upload]:  Started.
+[pydantic:file-upload]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:accept-header]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/accept-header
+[pydantic:accept-header]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:accept-header]:  Finished.
+[pydantic:http-head]:  Running generator...
+[pydantic:http-head]:  Started.
+[pydantic:http-head]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:file-download:no-inheritance-for-extended-models]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:auth-environment-variables]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/auth-environment-variables
+[pydantic:auth-environment-variables]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:auth-environment-variables]:  Finished.
+[pydantic:idempotency-headers]:  Running generator...
+[pydantic:idempotency-headers]:  Started.
+[pydantic:idempotency-headers]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:api-wide-base-path]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/api-wide-base-path
+[pydantic:api-wide-base-path]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:api-wide-base-path]:  Finished.
+[pydantic:imdb]:  Running generator...
+[pydantic:imdb]:  Started.
+[pydantic:imdb]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:content-type]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/content-type
+[pydantic:content-type]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:content-type]:  Finished.
+[pydantic:license]:  Running generator...
+[pydantic:license]:  Started.
+[pydantic:license]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:bearer-token-environment-variable]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/bearer-token-environment-variable
+[pydantic:bearer-token-environment-variable]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:bearer-token-environment-variable]:  Finished.
+[pydantic:literals-unions]:  Running generator...
+[pydantic:literals-unions]:  Started.
+[pydantic:literals-unions]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:bytes-download]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/bytes-download
+[pydantic:bytes-download]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:bytes-download]:  Finished.
+[pydantic:mixed-case]:  Running generator...
+[pydantic:mixed-case]:  Started.
+[pydantic:mixed-case]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:file-download:no-custom-config]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/file-download/no-custom-config
+[pydantic:file-download:no-custom-config]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:file-download:no-custom-config]:  Finished.
+[pydantic:multiple-request-bodies]:  Running generator...
+[pydantic:multiple-request-bodies]:  Started.
+[pydantic:multiple-request-bodies]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:bytes-upload]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/bytes-upload
+[pydantic:bytes-upload]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:bytes-upload]:  Finished.
+[pydantic:no-environment]:  Running generator...
+[pydantic:no-environment]:  Started.
+[pydantic:no-environment]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:file-upload]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:http-head]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:alias]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/alias
+[pydantic:alias]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:alias]:  Finished.
+[pydantic:nullable]:  Running generator...
+[pydantic:nullable]:  Started.
+[pydantic:nullable]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:idempotency-headers]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:imdb]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:query-parameters-openapi]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/query-parameters-openapi
+[pydantic:query-parameters-openapi]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:query-parameters-openapi]:  Finished.
+[pydantic:nullable-optional]:  Running generator...
+[pydantic:nullable-optional]:  Started.
+[pydantic:nullable-optional]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:literals-unions]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:license]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:multiple-request-bodies]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:alias-extends:no-custom-config]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/alias-extends/no-custom-config
+[pydantic:alias-extends:no-custom-config]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:alias-extends:no-custom-config]:  Finished.
+[pydantic:object]:  Running generator...
+[pydantic:object]:  Started.
+[pydantic:object]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:no-environment]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:alias-extends:no-inheritance-for-extended-models]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/alias-extends/no-inheritance-for-extended-models
+[pydantic:alias-extends:no-inheritance-for-extended-models]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:alias-extends:no-inheritance-for-extended-models]:  Finished.
+[pydantic:optional]:  Running generator...
+[pydantic:optional]:  Started.
+[pydantic:optional]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:extends]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/extends
+[pydantic:extends]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:extends]:  Finished.
+[pydantic:plain-text]:  Running generator...
+[pydantic:plain-text]:  Started.
+[pydantic:plain-text]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:mixed-case]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:query-parameters-openapi-as-objects]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/query-parameters-openapi-as-objects
+[pydantic:query-parameters-openapi-as-objects]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:query-parameters-openapi-as-objects]:  Finished.
+[pydantic:property-access]:  Running generator...
+[pydantic:property-access]:  Started.
+[pydantic:property-access]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:optional]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:object]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:plain-text]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:nullable]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:property-access]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:nullable-optional]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:file-download:no-inheritance-for-extended-models]:  Generator logs here: /tmp/tmp-4325-uwhLrmzWbpOE
+[pydantic:file-download:no-inheritance-for-extended-models]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/file-download/no-inheritance-for-extended-models
+[pydantic:file-download:no-inheritance-for-extended-models]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:file-download:no-inheritance-for-extended-models]:  Finished.
+[pydantic:public-object]:  Running generator...
+[pydantic:public-object]:  Started.
+[pydantic:public-object]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:public-object]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:file-upload]:  Generator logs here: /tmp/tmp-4325-oWVwFdnxueK7
+[pydantic:file-upload]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/file-upload
+[pydantic:file-upload]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:file-upload]:  Finished.
+[pydantic:query-parameters]:  Running generator...
+[pydantic:query-parameters]:  Started.
+[pydantic:query-parameters]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:query-parameters]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:no-environment]:  Generator logs here: /tmp/tmp-4325-vcPVkGIzLFji
+[pydantic:no-environment]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/no-environment
+[pydantic:no-environment]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:no-environment]:  Finished.
+[pydantic:request-parameters]:  Running generator...
+[pydantic:request-parameters]:  Started.
+[pydantic:request-parameters]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:idempotency-headers]:  Generator logs here: /tmp/tmp-4325-TN0Tvl8wRVGo
+[pydantic:request-parameters]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:http-head]:  Generator logs here: /tmp/tmp-4325-e001ne1e4Pvd
+[pydantic:idempotency-headers]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/idempotency-headers
+[pydantic:idempotency-headers]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:idempotency-headers]:  Finished.
+[pydantic:reserved-keywords]:  Running generator...
+[pydantic:reserved-keywords]:  Started.
+[pydantic:reserved-keywords]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:reserved-keywords]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:optional]:  Generator logs here: /tmp/tmp-4325-EYlacAzFrWfJ
+[pydantic:http-head]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/http-head
+[pydantic:http-head]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:http-head]:  Finished.
+[pydantic:server-sent-event-examples]:  Running generator...
+[pydantic:server-sent-event-examples]:  Started.
+[pydantic:server-sent-event-examples]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:server-sent-event-examples]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:optional]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/optional
+[pydantic:optional]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:optional]:  Finished.
+[pydantic:server-sent-events]:  Running generator...
+[pydantic:server-sent-events]:  Started.
+[pydantic:server-sent-events]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:server-sent-events]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:plain-text]:  Generator logs here: /tmp/tmp-4325-c7YNuCtcdi9z
+[pydantic:imdb]:  Generator logs here: /tmp/tmp-4325-wssQ0x0u9ZMH
+[pydantic:license]:  Generator logs here: /tmp/tmp-4325-dOWQOz5bhL5Z
+[pydantic:multiple-request-bodies]:  Generator logs here: /tmp/tmp-4325-KKBgtvcHDPV7
+[pydantic:literals-unions]:  Generator logs here: /tmp/tmp-4325-0TVvVbdVIX3S
+[pydantic:license]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/license
+[pydantic:license]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:license]:  Finished.
+[pydantic:simple-api]:  Running generator...
+[pydantic:simple-api]:  Started.
+[pydantic:simple-api]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:plain-text]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/plain-text
+[pydantic:plain-text]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:plain-text]:  Finished.
+[pydantic:simple-fhir:no-custom-config]:  Running generator...
+[pydantic:simple-fhir:no-custom-config]:  Started.
+[pydantic:simple-fhir:no-custom-config]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:property-access]:  Generator logs here: /tmp/tmp-4325-OuOVgHg2h2ea
+[pydantic:nullable]:  Generator logs here: /tmp/tmp-4325-7df6zpISFfEM
+[pydantic:mixed-case]:  Generator logs here: /tmp/tmp-4325-zjAMZPM4YLKZ
+[pydantic:simple-api]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:imdb]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/imdb
+[pydantic:imdb]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:imdb]:  Finished.
+[pydantic:simple-fhir:no-inheritance-for-extended-models]:  Running generator...
+[pydantic:simple-fhir:no-inheritance-for-extended-models]:  Started.
+[pydantic:simple-fhir:no-inheritance-for-extended-models]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:object]:  Generator logs here: /tmp/tmp-4325-WCBh9Dh3nx32
+[pydantic:nullable-optional]:  Generator logs here: /tmp/tmp-4325-XRvxBRj5YH24
+[pydantic:multiple-request-bodies]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/multiple-request-bodies
+[pydantic:multiple-request-bodies]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:multiple-request-bodies]:  Finished.
+[pydantic:single-url-environment-default]:  Running generator...
+[pydantic:single-url-environment-default]:  Started.
+[pydantic:single-url-environment-default]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:single-url-environment-default]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:simple-fhir:no-custom-config]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:simple-fhir:no-inheritance-for-extended-models]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:literals-unions]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/literals-unions
+[pydantic:literals-unions]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:literals-unions]:  Finished.
+[pydantic:single-url-environment-no-default]:  Running generator...
+[pydantic:single-url-environment-no-default]:  Started.
+[pydantic:single-url-environment-no-default]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:single-url-environment-no-default]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:object]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/object
+[pydantic:object]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:object]:  Finished.
+[pydantic:streaming-parameter]:  Running generator...
+[pydantic:streaming-parameter]:  Started.
+[pydantic:streaming-parameter]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:streaming-parameter]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:nullable]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/nullable
+[pydantic:nullable]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:nullable]:  Finished.
+[pydantic:streaming]:  Running generator...
+[pydantic:streaming]:  Started.
+[pydantic:streaming]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:streaming]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:property-access]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/property-access
+[pydantic:property-access]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:property-access]:  Finished.
+[pydantic:undiscriminated-unions]:  Running generator...
+[pydantic:undiscriminated-unions]:  Started.
+[pydantic:undiscriminated-unions]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:undiscriminated-unions]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:mixed-case]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/mixed-case
+[pydantic:mixed-case]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:mixed-case]:  Finished.
+[pydantic:unknown]:  Running generator...
+[pydantic:unknown]:  Started.
+[pydantic:unknown]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:unknown]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:nullable-optional]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/nullable-optional
+[pydantic:nullable-optional]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:nullable-optional]:  Finished.
+[pydantic:validation]:  Running generator...
+[pydantic:validation]:  Started.
+[pydantic:validation]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:validation]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:public-object]:  Generator logs here: /tmp/tmp-4325-u2CvyrbBwxdr
+[pydantic:public-object]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/public-object
+[pydantic:public-object]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:public-object]:  Finished.
+[pydantic:variables]:  Running generator...
+[pydantic:variables]:  Started.
+[pydantic:variables]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:variables]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:request-parameters]:  Generator logs here: /tmp/tmp-4325-SQJAlUuExeTV
+[pydantic:request-parameters]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/request-parameters
+[pydantic:request-parameters]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:request-parameters]:  Finished.
+[pydantic:websocket]:  Running generator...
+[pydantic:websocket]:  Started.
+[pydantic:websocket]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:websocket]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:query-parameters]:  Generator logs here: /tmp/tmp-4325-75AqwRa50g5p
+[pydantic:query-parameters]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/query-parameters
+[pydantic:query-parameters]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:query-parameters]:  Finished.
+[pydantic:websocket-bearer-auth]:  Running generator...
+[pydantic:websocket-bearer-auth]:  Started.
+[pydantic:websocket-bearer-auth]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:websocket-bearer-auth]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:server-sent-event-examples]:  Generator logs here: /tmp/tmp-4325-W2Dncsiys6jJ
+[pydantic:server-sent-events]:  Generator logs here: /tmp/tmp-4325-5hQCmtVTjQyG
+[pydantic:server-sent-event-examples]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/server-sent-event-examples
+[pydantic:server-sent-event-examples]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:server-sent-event-examples]:  Finished.
+[pydantic:any-auth]:  Running generator...
+[pydantic:any-auth]:  Started.
+[pydantic:any-auth]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:any-auth]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:reserved-keywords]:  Generator logs here: /tmp/tmp-4325-sCv3qLhslWM3
+[pydantic:server-sent-events]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/server-sent-events
+[pydantic:server-sent-events]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:server-sent-events]:  Finished.
+[pydantic:basic-auth-environment-variables]:  Running generator...
+[pydantic:basic-auth-environment-variables]:  Started.
+[pydantic:basic-auth-environment-variables]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:basic-auth-environment-variables]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:reserved-keywords]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/reserved-keywords
+[pydantic:reserved-keywords]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:reserved-keywords]:  Finished.
+[pydantic:basic-auth]:  Running generator...
+[pydantic:basic-auth]:  Started.
+[pydantic:basic-auth]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:basic-auth]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:simple-api]:  Generator logs here: /tmp/tmp-4325-EdQsGdMbJWkT
+[pydantic:simple-api]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/simple-api
+[pydantic:simple-api]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:simple-api]:  Finished.
+[pydantic:client-side-params]:  Running generator...
+[pydantic:client-side-params]:  Started.
+[pydantic:client-side-params]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:client-side-params]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:single-url-environment-no-default]:  Generator logs here: /tmp/tmp-4325-6PX6qL1HEqF7
+[pydantic:single-url-environment-no-default]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/single-url-environment-no-default
+[pydantic:single-url-environment-no-default]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:single-url-environment-no-default]:  Finished.
+[pydantic:custom-auth]:  Running generator...
+[pydantic:custom-auth]:  Started.
+[pydantic:custom-auth]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:custom-auth]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:single-url-environment-default]:  Generator logs here: /tmp/tmp-4325-fVwzHByoJuG3
+[pydantic:single-url-environment-default]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/single-url-environment-default
+[pydantic:single-url-environment-default]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:single-url-environment-default]:  Finished.
+[pydantic:error-property]:  Running generator...
+[pydantic:error-property]:  Started.
+[pydantic:error-property]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:error-property]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:simple-fhir:no-custom-config]:  Generator logs here: /tmp/tmp-4325-94DNjfJm4xWg
+[pydantic:simple-fhir:no-custom-config]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/simple-fhir/no-custom-config
+[pydantic:simple-fhir:no-custom-config]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:simple-fhir:no-custom-config]:  Finished.
+[pydantic:errors]:  Running generator...
+[pydantic:errors]:  Started.
+[pydantic:errors]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:errors]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:simple-fhir:no-inheritance-for-extended-models]:  Generator logs here: /tmp/tmp-4325-eqKZMbgpo2UD
+[pydantic:simple-fhir:no-inheritance-for-extended-models]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/simple-fhir/no-inheritance-for-extended-models
+[pydantic:simple-fhir:no-inheritance-for-extended-models]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:simple-fhir:no-inheritance-for-extended-models]:  Finished.
+[pydantic:extra-properties]:  Running generator...
+[pydantic:extra-properties]:  Started.
+[pydantic:extra-properties]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:extra-properties]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:streaming]:  Generator logs here: /tmp/tmp-4325-ezlad4MnzwNX
+[pydantic:streaming]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/streaming
+[pydantic:streaming]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:streaming]:  Finished.
+[pydantic:multi-url-environment]:  Running generator...
+[pydantic:multi-url-environment]:  Started.
+[pydantic:multi-url-environment]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:multi-url-environment]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:undiscriminated-unions]:  Generator logs here: /tmp/tmp-4325-5XC4jhPHr2cQ
+[pydantic:undiscriminated-unions]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/undiscriminated-unions
+[pydantic:undiscriminated-unions]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:undiscriminated-unions]:  Finished.
+[pydantic:multi-line-docs]:  Running generator...
+[pydantic:multi-line-docs]:  Started.
+[pydantic:multi-line-docs]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:multi-line-docs]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:streaming-parameter]:  Generator logs here: /tmp/tmp-4325-XxPjO8yEWmT6
+[pydantic:unknown]:  Generator logs here: /tmp/tmp-4325-yqKLkuQZzK8L
+[pydantic:streaming-parameter]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/streaming-parameter
+[pydantic:streaming-parameter]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:streaming-parameter]:  Finished.
+[pydantic:multi-url-environment-no-default]:  Running generator...
+[pydantic:multi-url-environment-no-default]:  Started.
+[pydantic:multi-url-environment-no-default]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:multi-url-environment-no-default]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:unknown]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/unknown
+[pydantic:unknown]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:unknown]:  Finished.
+[pydantic:package-yml]:  Running generator...
+[pydantic:package-yml]:  Started.
+[pydantic:package-yml]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:package-yml]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:validation]:  Generator logs here: /tmp/tmp-4325-lGQ2hQO5Zey5
+[pydantic:validation]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/validation
+[pydantic:validation]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:validation]:  Finished.
+[pydantic:pagination-custom]:  Running generator...
+[pydantic:pagination-custom]:  Started.
+[pydantic:pagination-custom]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:pagination-custom]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:variables]:  Generator logs here: /tmp/tmp-4325-j5sluFmUcEnn
+[pydantic:variables]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/variables
+[pydantic:variables]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:variables]:  Finished.
+[pydantic:path-parameters]:  Running generator...
+[pydantic:path-parameters]:  Started.
+[pydantic:path-parameters]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:path-parameters]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:websocket]:  Generator logs here: /tmp/tmp-4325-6C65wiwADSdt
+[pydantic:websocket]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/websocket
+[pydantic:websocket]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:websocket]:  Finished.
+[pydantic:response-property]:  Running generator...
+[pydantic:response-property]:  Started.
+[pydantic:response-property]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:response-property]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:websocket-bearer-auth]:  Generator logs here: /tmp/tmp-4325-PPVs6hm7AshH
+[pydantic:basic-auth]:  Generator logs here: /tmp/tmp-4325-QIJfHfT9aBl3
+[pydantic:any-auth]:  Generator logs here: /tmp/tmp-4325-SSaI2Yl4L4d9
+[pydantic:websocket-bearer-auth]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/websocket-bearer-auth
+[pydantic:websocket-bearer-auth]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:websocket-bearer-auth]:  Finished.
+[pydantic:websocket-inferred-auth]:  Running generator...
+[pydantic:websocket-inferred-auth]:  Started.
+[pydantic:websocket-inferred-auth]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:websocket-inferred-auth]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:basic-auth]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/basic-auth
+[pydantic:basic-auth]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:basic-auth]:  Finished.
+[pydantic:circular-references:no-inheritance-for-extended-models]:  Running generator...
+[pydantic:circular-references:no-inheritance-for-extended-models]:  Started.
+[pydantic:circular-references:no-inheritance-for-extended-models]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:circular-references:no-inheritance-for-extended-models]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:basic-auth-environment-variables]:  Generator logs here: /tmp/tmp-4325-NEUjI4j071y6
+[pydantic:any-auth]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/any-auth
+[pydantic:any-auth]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:any-auth]:  Finished.
+[pydantic:circular-references-advanced:no-custom-config]:  Running generator...
+[pydantic:circular-references-advanced:no-custom-config]:  Started.
+[pydantic:circular-references-advanced:no-custom-config]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:circular-references-advanced:no-custom-config]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:custom-auth]:  Generator logs here: /tmp/tmp-4325-wPfPbmo9pM2F
+[pydantic:basic-auth-environment-variables]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/basic-auth-environment-variables
+[pydantic:basic-auth-environment-variables]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:basic-auth-environment-variables]:  Finished.
+[pydantic:circular-references-advanced:no-inheritance-for-extended-models]:  Running generator...
+[pydantic:circular-references-advanced:no-inheritance-for-extended-models]:  Started.
+[pydantic:circular-references-advanced:no-inheritance-for-extended-models]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:circular-references-advanced:no-inheritance-for-extended-models]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:custom-auth]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/custom-auth
+[pydantic:custom-auth]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:custom-auth]:  Finished.
+[pydantic:circular-references:no-custom-config]:  Running generator...
+[pydantic:circular-references:no-custom-config]:  Started.
+[pydantic:circular-references:no-custom-config]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:circular-references:no-custom-config]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:error-property]:  Generator logs here: /tmp/tmp-4325-jKzjgATTOZj7
+[pydantic:client-side-params]:  Generator logs here: /tmp/tmp-4325-vufXWwIVCz7U
+[pydantic:error-property]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/error-property
+[pydantic:error-property]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:error-property]:  Finished.
+[pydantic:unions:no-custom-config]:  Running generator...
+[pydantic:unions:no-custom-config]:  Started.
+[pydantic:unions:no-custom-config]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:unions:no-custom-config]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:multi-url-environment-no-default]:  Generator logs here: /tmp/tmp-4325-dv97BHwNv1wH
+[pydantic:client-side-params]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/client-side-params
+[pydantic:client-side-params]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:client-side-params]:  Finished.
+[pydantic:unions:no-inheritance-for-extended-models]:  Running generator...
+[pydantic:unions:no-inheritance-for-extended-models]:  Started.
+[pydantic:unions:no-inheritance-for-extended-models]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:unions:no-inheritance-for-extended-models]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:multi-url-environment]:  Generator logs here: /tmp/tmp-4325-5Xgvfn5ZAeAN
+[pydantic:extra-properties]:  Generator logs here: /tmp/tmp-4325-lyMfulttmBP4
+[pydantic:multi-url-environment-no-default]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/multi-url-environment-no-default
+[pydantic:multi-url-environment-no-default]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:multi-url-environment-no-default]:  Finished.
+[pydantic:empty-clients]:  Running generator...
+[pydantic:empty-clients]:  Started.
+[pydantic:empty-clients]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:empty-clients]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:multi-url-environment]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/multi-url-environment
+[pydantic:multi-url-environment]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:multi-url-environment]:  Finished.
+[pydantic:inferred-auth-explicit]:  Running generator...
+[pydantic:inferred-auth-explicit]:  Started.
+[pydantic:inferred-auth-explicit]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:inferred-auth-explicit]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:errors]:  Generator logs here: /tmp/tmp-4325-w95pSiDDhvDr
+[pydantic:extra-properties]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/extra-properties
+[pydantic:extra-properties]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:extra-properties]:  Finished.
+[pydantic:inferred-auth-implicit]:  Running generator...
+[pydantic:inferred-auth-implicit]:  Started.
+[pydantic:inferred-auth-implicit]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:inferred-auth-implicit]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:errors]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/errors
+[pydantic:errors]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:errors]:  Finished.
+[pydantic:inferred-auth-implicit-no-expiry]:  Running generator...
+[pydantic:inferred-auth-implicit-no-expiry]:  Started.
+[pydantic:inferred-auth-implicit-no-expiry]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:inferred-auth-implicit-no-expiry]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:multi-line-docs]:  Generator logs here: /tmp/tmp-4325-UlUuMgMeH0rg
+[pydantic:pagination-custom]:  Generator logs here: /tmp/tmp-4325-kEQkCtW6Cu9k
+[pydantic:package-yml]:  Generator logs here: /tmp/tmp-4325-i38lAoTvEaos
+[pydantic:pagination-custom]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/pagination-custom
+[pydantic:pagination-custom]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:pagination-custom]:  Finished.
+[pydantic:oauth-client-credentials]:  Running generator...
+[pydantic:oauth-client-credentials]:  Started.
+[pydantic:oauth-client-credentials]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:multi-line-docs]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/multi-line-docs
+[pydantic:multi-line-docs]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:multi-line-docs]:  Finished.
+[pydantic:oauth-client-credentials-custom]:  Running generator...
+[pydantic:oauth-client-credentials-custom]:  Started.
+[pydantic:oauth-client-credentials-custom]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:oauth-client-credentials]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:oauth-client-credentials-custom]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:package-yml]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/package-yml
+[pydantic:package-yml]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:package-yml]:  Finished.
+[pydantic:oauth-client-credentials-nested-root]:  Running generator...
+[pydantic:oauth-client-credentials-nested-root]:  Started.
+[pydantic:oauth-client-credentials-nested-root]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:oauth-client-credentials-nested-root]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:path-parameters]:  Generator logs here: /tmp/tmp-4325-8U4zl7faJHfC
+[pydantic:path-parameters]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/path-parameters
+[pydantic:path-parameters]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:path-parameters]:  Finished.
+[pydantic:oauth-client-credentials-default]:  Running generator...
+[pydantic:oauth-client-credentials-default]:  Started.
+[pydantic:oauth-client-credentials-default]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:oauth-client-credentials-default]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:response-property]:  Generator logs here: /tmp/tmp-4325-wgcHKmZ1Mc8K
+[pydantic:response-property]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/response-property
+[pydantic:response-property]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:response-property]:  Finished.
+[pydantic:oauth-client-credentials-environment-variables]:  Running generator...
+[pydantic:oauth-client-credentials-environment-variables]:  Started.
+[pydantic:oauth-client-credentials-environment-variables]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:oauth-client-credentials-environment-variables]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:websocket-inferred-auth]:  Generator logs here: /tmp/tmp-4325-uQpD4pr5zmZ3
+[pydantic:websocket-inferred-auth]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/websocket-inferred-auth
+[pydantic:websocket-inferred-auth]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:websocket-inferred-auth]:  Finished.
+[pydantic:objects-with-imports]:  Running generator...
+[pydantic:objects-with-imports]:  Started.
+[pydantic:objects-with-imports]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:objects-with-imports]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:circular-references-advanced:no-custom-config]:  Generator logs here: /tmp/tmp-4325-IlvFrowcTOrS
+[pydantic:circular-references-advanced:no-custom-config]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/circular-references-advanced/no-custom-config
+[pydantic:circular-references-advanced:no-custom-config]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:circular-references-advanced:no-custom-config]:  Finished.
+[pydantic:pagination:no-inheritance-for-extended-models]:  Running generator...
+[pydantic:pagination:no-inheritance-for-extended-models]:  Started.
+[pydantic:pagination:no-inheritance-for-extended-models]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:circular-references:no-custom-config]:  Generator logs here: /tmp/tmp-4325-6SfCL4GHuEp5
+[pydantic:inferred-auth-implicit]:  Generator logs here: /tmp/tmp-4325-fCRBihOn2DTh
+[pydantic:pagination:no-inheritance-for-extended-models]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:circular-references:no-inheritance-for-extended-models]:  Generator logs here: /tmp/tmp-4325-66n4Ln6yG23t
+[pydantic:circular-references-advanced:no-inheritance-for-extended-models]:  Generator logs here: /tmp/tmp-4325-KD4Z0N2C3Ve1
+[pydantic:inferred-auth-implicit]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/inferred-auth-implicit
+[pydantic:inferred-auth-implicit]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:inferred-auth-implicit]:  Finished.
+[pydantic:pagination:no-custom-config]:  Running generator...
+[pydantic:pagination:no-custom-config]:  Started.
+[pydantic:pagination:no-custom-config]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:inferred-auth-implicit-no-expiry]:  Generator logs here: /tmp/tmp-4325-GrmRJH3vaIoQ
+[pydantic:unions:no-custom-config]:  Generator logs here: /tmp/tmp-4325-g9Ix6mCWi3tH
+[pydantic:inferred-auth-explicit]:  Generator logs here: /tmp/tmp-4325-ICzW0jWJ0R1K
+[pydantic:circular-references:no-custom-config]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/circular-references/no-custom-config
+[pydantic:circular-references:no-custom-config]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:circular-references:no-custom-config]:  Finished.
+[pydantic:oauth-client-credentials-with-variables]:  Running generator...
+[pydantic:oauth-client-credentials-with-variables]:  Started.
+[pydantic:oauth-client-credentials-with-variables]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:oauth-client-credentials-nested-root]:  Generator logs here: /tmp/tmp-4325-HtUfov3JPoPO
+[pydantic:oauth-client-credentials-with-variables]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:pagination:no-custom-config]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:circular-references:no-inheritance-for-extended-models]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/circular-references/no-inheritance-for-extended-models
+[pydantic:circular-references:no-inheritance-for-extended-models]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:circular-references:no-inheritance-for-extended-models]:  Finished.
+[pydantic:mixed-file-directory]:  Running generator...
+[pydantic:mixed-file-directory]:  Started.
+[pydantic:mixed-file-directory]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:mixed-file-directory]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:circular-references-advanced:no-inheritance-for-extended-models]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/circular-references-advanced/no-inheritance-for-extended-models
+[pydantic:circular-references-advanced:no-inheritance-for-extended-models]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:circular-references-advanced:no-inheritance-for-extended-models]:  Finished.
+[pydantic:enum]:  Running generator...
+[pydantic:enum]:  Started.
+[pydantic:enum]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:enum]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:inferred-auth-implicit-no-expiry]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/inferred-auth-implicit-no-expiry
+[pydantic:inferred-auth-implicit-no-expiry]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:inferred-auth-implicit-no-expiry]:  Finished.
+[pydantic:literal]:  Running generator...
+[pydantic:literal]:  Started.
+[pydantic:literal]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:empty-clients]:  Generator logs here: /tmp/tmp-4325-1671AiLUmDIa
+[pydantic:inferred-auth-explicit]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/inferred-auth-explicit
+[pydantic:inferred-auth-explicit]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:inferred-auth-explicit]:  Finished.
+[pydantic:audiences]:  Running generator...
+[pydantic:audiences]:  Started.
+[pydantic:audiences]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:oauth-client-credentials-nested-root]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/oauth-client-credentials-nested-root
+[pydantic:oauth-client-credentials-nested-root]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:oauth-client-credentials-nested-root]:  Finished.
+[pydantic:cross-package-type-names]:  Running generator...
+[pydantic:cross-package-type-names]:  Started.
+[pydantic:cross-package-type-names]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:literal]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:audiences]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:cross-package-type-names]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:unions:no-inheritance-for-extended-models]:  Generator logs here: /tmp/tmp-4325-63hN4DBtQ2gi
+[pydantic:oauth-client-credentials]:  Generator logs here: /tmp/tmp-4325-lR4rgzVXhClp
+[pydantic:oauth-client-credentials-custom]:  Generator logs here: /tmp/tmp-4325-9yt6OUK4WBfa
+[pydantic:unions:no-custom-config]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/unions/no-custom-config
+[pydantic:unions:no-custom-config]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:unions:no-custom-config]:  Finished.
+[pydantic:folders]:  Running generator...
+[pydantic:folders]:  Started.
+[pydantic:folders]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:empty-clients]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/empty-clients
+[pydantic:empty-clients]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:empty-clients]:  Finished.
+[pydantic:examples]:  Running generator...
+[pydantic:examples]:  Started.
+[pydantic:examples]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:oauth-client-credentials]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/oauth-client-credentials
+[pydantic:oauth-client-credentials]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:oauth-client-credentials]:  Finished.
+[pydantic:trace]:  Running generator...
+[pydantic:trace]:  Started.
+[pydantic:trace]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:folders]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:oauth-client-credentials-default]:  Generator logs here: /tmp/tmp-4325-2RxMWG69qOq8
+[pydantic:oauth-client-credentials-custom]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/oauth-client-credentials-custom
+[pydantic:oauth-client-credentials-custom]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:oauth-client-credentials-custom]:  Finished.
+[pydantic:exhaustive:pydantic-v2]:  Running generator...
+[pydantic:exhaustive:pydantic-v2]:  Started.
+[pydantic:exhaustive:pydantic-v2]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:examples]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:exhaustive:pydantic-v2]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:unions:no-inheritance-for-extended-models]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/unions/no-inheritance-for-extended-models
+[pydantic:unions:no-inheritance-for-extended-models]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:unions:no-inheritance-for-extended-models]:  Finished.
+[pydantic:exhaustive:pydantic-v1]:  Running generator...
+[pydantic:exhaustive:pydantic-v1]:  Started.
+[pydantic:exhaustive:pydantic-v1]:  Starting generation for fernapi/fern-pydantic-model
+[pydantic:oauth-client-credentials-default]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/oauth-client-credentials-default
+[pydantic:oauth-client-credentials-default]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:oauth-client-credentials-default]:  Finished.
+[pydantic:trace]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:exhaustive:pydantic-v1]:  Executing generator fernapi/fern-pydantic-model using Docker image: fernapi/fern-pydantic-model:latest
+[pydantic:oauth-client-credentials-environment-variables]:  Generator logs here: /tmp/tmp-4325-wv8QN4sHGkWT
+[pydantic:oauth-client-credentials-environment-variables]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/oauth-client-credentials-environment-variables
+[pydantic:oauth-client-credentials-environment-variables]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:oauth-client-credentials-environment-variables]:  Finished.
+[pydantic:objects-with-imports]:  Generator logs here: /tmp/tmp-4325-e1xRTnkRoOD9
+[pydantic:objects-with-imports]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/objects-with-imports
+[pydantic:objects-with-imports]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:objects-with-imports]:  Finished.
+[pydantic:pagination:no-inheritance-for-extended-models]:  Generator logs here: /tmp/tmp-4325-WVLLo2kkmT4K
+[pydantic:pagination:no-inheritance-for-extended-models]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/pagination/no-inheritance-for-extended-models
+[pydantic:pagination:no-inheritance-for-extended-models]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:pagination:no-inheritance-for-extended-models]:  Finished.
+[pydantic:enum]:  Generator logs here: /tmp/tmp-4325-77jfZBzv2dgq
+[pydantic:enum]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/enum
+[pydantic:enum]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:enum]:  Finished.
+[pydantic:mixed-file-directory]:  Generator logs here: /tmp/tmp-4325-9i3fMcgrkm4T
+[pydantic:pagination:no-custom-config]:  Generator logs here: /tmp/tmp-4325-WWCH6BYilO02
+[pydantic:mixed-file-directory]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/mixed-file-directory
+[pydantic:mixed-file-directory]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:mixed-file-directory]:  Finished.
+[pydantic:oauth-client-credentials-with-variables]:  Generator logs here: /tmp/tmp-4325-9VaKjtjXDgvJ
+[pydantic:oauth-client-credentials-with-variables]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/oauth-client-credentials-with-variables
+[pydantic:oauth-client-credentials-with-variables]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:oauth-client-credentials-with-variables]:  Finished.
+[pydantic:pagination:no-custom-config]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/pagination/no-custom-config
+[pydantic:pagination:no-custom-config]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:pagination:no-custom-config]:  Finished.
+[pydantic:cross-package-type-names]:  Generator logs here: /tmp/tmp-4325-kOxQPizTSPa5
+[pydantic:cross-package-type-names]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/cross-package-type-names
+[pydantic:cross-package-type-names]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:cross-package-type-names]:  Finished.
+[pydantic:literal]:  Generator logs here: /tmp/tmp-4325-ulb7TZXyFX1p
+[pydantic:audiences]:  Generator logs here: /tmp/tmp-4325-6RQFA30yycI8
+[pydantic:literal]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/literal
+[pydantic:literal]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:literal]:  Finished.
+[pydantic:audiences]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/audiences
+[pydantic:audiences]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:audiences]:  Finished.
+[pydantic:folders]:  Generator logs here: /tmp/tmp-4325-8bM16k2A483X
+[pydantic:folders]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/folders
+[pydantic:folders]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:folders]:  Finished.
+[pydantic:examples]:  Generator logs here: /tmp/tmp-4325-b0umDuPd6Ujl
+[pydantic:examples]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/examples
+[pydantic:examples]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:examples]:  Finished.
+[pydantic:exhaustive:pydantic-v2]:  Generator logs here: /tmp/tmp-4325-RiiwQ4Et9zB8
+[pydantic:exhaustive:pydantic-v2]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/exhaustive/pydantic-v2
+[pydantic:exhaustive:pydantic-v2]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:exhaustive:pydantic-v2]:  Finished.
+[pydantic:exhaustive:pydantic-v1]:  Generator logs here: /tmp/tmp-4325-IoQupKgUasGk
+[pydantic:exhaustive:pydantic-v1]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/exhaustive/pydantic-v1
+[pydantic:exhaustive:pydantic-v1]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:exhaustive:pydantic-v1]:  Finished.
+[pydantic:trace]:  Generator logs here: /tmp/tmp-4325-6GLGhVddqCYh
+[pydantic:trace]:  Wrote files to /home/runner/work/fern/fern/seed/pydantic/trace
+[pydantic:trace]:  Skipping dynamic snippet tests; shouldGenerateDynamicSnippetTests: false, language: python
+[pydantic:trace]:  Finished.
+┌────────────────────────────────────────────────┬────────────────────────────────────┬─────────┬─────────────────┬──────────────┬──────────────┬─────────────────┐
+│[37m [0m[01m                                          Name[0m │[37m [0m[01m                     Output Folder[0m │[37m [0m[01m Result[0m │[37m [0m[01mGeneration Time[0m │[37m [0m[01mCompile Time[0m │[37m [0m[01mFailure Type[0m │[37m [0m[01mFailure Message[0m │
+├────────────────────────────────────────────────┼────────────────────────────────────┼─────────┼─────────────────┼──────────────┼──────────────┼─────────────────┤
+│[37m [0m[37m                                 accept-header[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 4.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                         alias[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 4.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                 alias-extends[0m │[37m [0m[37m                  no-custom-config[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          1m 5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                 alias-extends[0m │[37m [0m[37mno-inheritance-for-extended-models[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          1m 5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                      any-auth[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          50.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                            api-wide-base-path[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          1m 4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                     audiences[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          41.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                    auth-environment-variables[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 3.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    basic-auth[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          48.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m              basic-auth-environment-variables[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          50.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m             bearer-token-environment-variable[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 3.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                bytes-download[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 3.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                  bytes-upload[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 3.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                           circular-references[0m │[37m [0m[37m                  no-custom-config[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          52.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                           circular-references[0m │[37m [0m[37mno-inheritance-for-extended-models[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          55.2s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                  circular-references-advanced[0m │[37m [0m[37m                  no-custom-config[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          48.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                  circular-references-advanced[0m │[37m [0m[37mno-inheritance-for-extended-models[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          54.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                            client-side-params[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          52.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                  content-type[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 3.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                      cross-package-type-names[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            41s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                   custom-auth[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          47.9s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                 empty-clients[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          51.2s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                          enum[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          38.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                error-property[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                        errors[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          50.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                      examples[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            42s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    exhaustive[0m │[37m [0m[37m                       pydantic-v1[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          35.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    exhaustive[0m │[37m [0m[37m                       pydantic-v2[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          38.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                       extends[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 4.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                              extra-properties[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          48.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                 file-download[0m │[37m [0m[37m                  no-custom-config[0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 3.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                 file-download[0m │[37m [0m[37mno-inheritance-for-extended-models[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          38.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                   file-upload[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          44.2s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                       folders[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            41s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                     http-head[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          46.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                           idempotency-headers[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          45.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                          imdb[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                        inferred-auth-explicit[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            50s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                        inferred-auth-implicit[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          46.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m              inferred-auth-implicit-no-expiry[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                       license[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          48.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                       literal[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          41.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                               literals-unions[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          51.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    mixed-case[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          52.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                          mixed-file-directory[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          40.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                               multi-line-docs[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          47.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                         multi-url-environment[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          46.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m              multi-url-environment-no-default[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          45.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                       multiple-request-bodies[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                no-environment[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          44.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                      nullable[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          51.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                             nullable-optional[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          52.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                      oauth-client-credentials[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          50.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m               oauth-client-credentials-custom[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          53.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m              oauth-client-credentials-default[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          51.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37moauth-client-credentials-environment-variables[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          39.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m          oauth-client-credentials-nested-root[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            48s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m       oauth-client-credentials-with-variables[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          41.2s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                        object[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          50.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                          objects-with-imports[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          41.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                      optional[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          46.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                   package-yml[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          47.2s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    pagination[0m │[37m [0m[37m                  no-custom-config[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          43.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    pagination[0m │[37m [0m[37mno-inheritance-for-extended-models[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          42.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                             pagination-custom[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          45.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                               path-parameters[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          39.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    plain-text[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          47.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                               property-access[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                 public-object[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          37.2s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                              query-parameters[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          45.9s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                      query-parameters-openapi[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 5.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m           query-parameters-openapi-as-objects[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 7.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                            request-parameters[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          41.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                             reserved-keywords[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            47s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                             response-property[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          43.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                    server-sent-event-examples[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          45.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                            server-sent-events[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          44.7s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    simple-api[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            45s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                   simple-fhir[0m │[37m [0m[37m                  no-custom-config[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                   simple-fhir[0m │[37m [0m[37mno-inheritance-for-extended-models[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                single-url-environment-default[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          46.4s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m             single-url-environment-no-default[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            44s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                     streaming[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          48.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                           streaming-parameter[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          50.3s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                         trace[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          44.2s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                        undiscriminated-unions[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m            49s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                        unions[0m │[37m [0m[37m                  no-custom-config[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          52.9s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                        unions[0m │[37m [0m[37mno-inheritance-for-extended-models[0m │[37m [0m[37msuccess[0m │[37m [0m[37m          59.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                       unknown[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.6s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                    validation[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          49.9s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                     variables[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          40.9s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                       version[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          1m 5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                            version-no-default[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m        1m 4.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                                     websocket[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          48.5s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                         websocket-bearer-auth[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          50.8s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+│[37m [0m[37m                       websocket-inferred-auth[0m │[37m [0m[37m                               -- [0m │[37m [0m[37msuccess[0m │[37m [0m[37m          48.1s[0m │[37m [0m[37m         1ms[0m │[37m [0m[37m            [0m │[37m [0m[37m               [0m │
+└────────────────────────────────────────────────┴────────────────────────────────────┴─────────┴─────────────────┴──────────────┴──────────────┴─────────────────┘
+96/96 test cases passed ✅
