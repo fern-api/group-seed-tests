@@ -27338,9 +27338,10 @@ function createBalancedGroups(items, numGroups, addPackageForLeftovers) {
 }
 
 async function parseDataFromSeedTestAsciiTable(input) {
-    // Strip any ANSI escape sequences when reading in data
+    // Strip any ANSI escape sequences when reading in data (skip that line in linter)
     const lines = input
         .trim()
+        // eslint-disable-next-line no-control-regex
         .replace(/\x1b\[[0-9;]*m/g, "")
         .split("\n");
     // Find the header line (contains column names)
@@ -27523,7 +27524,7 @@ async function run() {
         }
         console.log("Successfully parsed test table from test log file!");
         // Parse row data from table of tests and times
-        let extractedJsonData = await parseDataFromSeedTestAsciiTable(extractedTableOfTests);
+        const extractedJsonData = await parseDataFromSeedTestAsciiTable(extractedTableOfTests);
         // Validate extracted json-data
         if (!extractedJsonData) {
             coreExports.error("No data returned from parseTimesFromSeedTestAsciiTable");

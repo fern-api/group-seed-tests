@@ -8,9 +8,10 @@ export interface ParsedRow {
 export async function parseDataFromSeedTestAsciiTable(
   input: string,
 ): Promise<ParsedRow[]> {
-  // Strip any ANSI escape sequences when reading in data
+  // Strip any ANSI escape sequences when reading in data (skip that line in linter)
   const lines = input
     .trim()
+    // eslint-disable-next-line no-control-regex
     .replace(/\x1b\[[0-9;]*m/g, "")
     .split("\n");
 

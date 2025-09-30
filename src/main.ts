@@ -116,9 +116,8 @@ export async function run(): Promise<void> {
     console.log("Successfully parsed test table from test log file!");
 
     // Parse row data from table of tests and times
-    let extractedJsonData: ParsedRow[] = await parseDataFromSeedTestAsciiTable(
-      extractedTableOfTests,
-    );
+    const extractedJsonData: ParsedRow[] =
+      await parseDataFromSeedTestAsciiTable(extractedTableOfTests);
 
     // Validate extracted json-data
     if (!extractedJsonData) {
