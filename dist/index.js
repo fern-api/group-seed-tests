@@ -27506,7 +27506,7 @@ async function run() {
         const totalTestTimeSeconds = Object.values(result).reduce((sum, time) => sum + time, 0);
         const totalTestTimeRoundedSeconds = Math.round(totalTestTimeSeconds);
         const fileContents = {
-            "total-test-time-seconds": totalTestTimeRoundedSeconds,
+            totalTestTimeSeconds: totalTestTimeRoundedSeconds,
             groups: JSON.parse(jsonOfBalancedGroups),
         };
         const fileContentsAsJson = JSON.stringify(fileContents, null, 2);

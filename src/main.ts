@@ -106,7 +106,7 @@ export async function run(): Promise<void> {
     const totalTestTimeRoundedSeconds = Math.round(totalTestTimeSeconds);
 
     const fileContents = {
-      "total-test-time-seconds": totalTestTimeRoundedSeconds,
+      totalTestTimeSeconds: totalTestTimeRoundedSeconds,
       groups: JSON.parse(jsonOfBalancedGroups),
     };
 
