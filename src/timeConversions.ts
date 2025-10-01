@@ -1,0 +1,53 @@
+import type { ParsedRow } from "./seedTestLogParser.js";
+
+// Function to convert time strings to seconds. Acceptable formats as inputs are:
+// 1. 1m 23s
+// 2. 1m 23.7s
+// 3. 43s
+// 4. 43.7s
+// 5. 700ms
+// Will add floats but return rounded to the nearest integer. No need for that level of precision.
+function convertToSeconds(timeStr: string): number {
+  if (!timeStr) return 0;
+
+  let totalSeconds = 0;
+
+  // Extract milliseconds if present (more specific, extract first)
+  const msMatch = timeStr.match(/(\d+(?:\.\d+)?)ms/);
+  if (msMatch) {
+    totalSeconds += parseFloat(msMatch[1]) / 1000;
+  } else {
+    // Extract minutes (if present)
+    const minuteMatch = timeStr.match(/(\d+)m\s/);
+    if (minuteMatch) {
+      totalSeconds += parseInt(minuteMatch[1]) * 60;
+    }
+
+    // Extract seconds (if present)
+    const secondMatch = timeStr.match(/(\d+(?:\.\d+)?)s/);
+    if (secondMatch) {
+      totalSeconds += parseFloat(secondMatch[1]);
+    }
+  }
+
+  console.log(
+    `Given String: ${timeStr}. Converted to seconds: ${totalSeconds}`,
+  );
+
+  return Math.round(totalSeconds);
+}
+
+export function calculateTotalTimes(data: ParsedRow[]) {
+  const totalTimes: Record<string, number> = {};
+
+  for (const item of data) {
+    const generationSeconds = convertToSeconds(item.GenerationTime);
+    const compileSeconds = convertToSeconds(item.CompileTime);
+    const totalSeconds = generationSeconds + compileSeconds;
+
+    // Store using the Name as the key
+    totalTimes[item.Name] = totalSeconds;
+  }
+
+  return totalTimes;
+}

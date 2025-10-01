@@ -1,23 +1,25 @@
-name: The name of your action here
+name: Group Seed Tests
 description: Provide a description here
-author: Your name or organization here
+author: Fern
 
-# Add your action's branding here. This will appear on the GitHub Marketplace.
+# Action branding. This will appear on the GitHub Marketplace.
 branding:
-  icon: heart
-  color: red
+  icon: box
+  color: green
 
-# Define your inputs here.
+# Define inputs
 inputs:
-  milliseconds:
-    description: Your input description here
+  number-of-groups:
+    description: The number of groups to group the tests into
     required: true
-    default: '1000'
+  seed-test-log-file-path:
+    description: Log file to parse test output from
+    required: true
 
-# Define your outputs here.
+# Define outputs
 outputs:
-  time:
-    description: Your output description here
+  json-file-contents:
+    description: "All information in JSON format for grouping tests"
 
 runs:
   using: node24

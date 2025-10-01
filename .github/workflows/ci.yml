@@ -57,8 +57,5 @@ jobs:
         id: test-action
         uses: ./
         with:
-          milliseconds: 2000
-
-      - name: Print Output
-        id: output
-        run: echo "${{ steps.test-action.outputs.time }}"
+          number-of-groups: "10"
+          seed-test-log-file-path: "example-test-output.txt"

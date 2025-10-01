@@ -27247,17 +27247,184 @@ function requireCore () {
 var coreExports = requireCore();
 
 /**
- * Waits for a number of milliseconds.
+ * Greedy Bin Grouping Algorithm for Load Balancing
  *
- * @param milliseconds The number of milliseconds to wait.
- * @returns Resolves with 'done!' after the wait is over.
+ * This algorithm distributes items across a specified number of groups (bins)
+ * to minimize the maximum total time/weight in any single group.
+ *
+ * Strategy: Always assign the next item to the group with the smallest current total.
  */
-async function wait(milliseconds) {
-    return new Promise((resolve) => {
-        if (isNaN(milliseconds))
-            throw new Error('milliseconds is not a number');
-        setTimeout(() => resolve('done!'), milliseconds);
-    });
+function createBalancedGroups(items, numGroups) {
+    // Initialize groups with empty arrays and zero total time
+    const groups = Array.from({ length: numGroups }, () => ({
+        fixtures: [],
+        groupTotalTimeSeconds: 0,
+    }));
+    // Sort items by time descending (largest first)
+    // This helps achieve better balance by placing heavy items first
+    const sortedItems = [...items].sort((a, b) => b.time - a.time);
+    // For each item, add it to the group with the smallest current total time
+    for (const item of sortedItems) {
+        // Find group with minimum total time
+        let minIndex = 0;
+        let minTime = groups[0].groupTotalTimeSeconds;
+        for (let i = 1; i < groups.length; i++) {
+            if (groups[i].groupTotalTimeSeconds < minTime) {
+                minTime = groups[i].groupTotalTimeSeconds;
+                minIndex = i;
+            }
+        }
+        // Add item to the group with minimum time
+        groups[minIndex].fixtures.push(item.name);
+        groups[minIndex].groupTotalTimeSeconds += item.time;
+    }
+    return groups;
+}
+
+async function parseDataFromSeedTestAsciiTable(input) {
+    // Strip any ANSI escape sequences when reading in data (skip that line in linter)
+    /* eslint-disable no-control-regex*/
+    // biome-ignore-start lint/suspicious/noControlCharactersInRegex: Removing ANSI escape sequences
+    const lines = input
+        .trim()
+        .replace(/\x1b\[[0-9;]*m/g, "")
+        .split("\n");
+    // biome-ignore-end lint/suspicious/noControlCharactersInRegex
+    /* eslint-enable no-control-regex*/
+    // Find the header line (contains column names)
+    let headerLineIndex = -1;
+    for (let i = 0; i < lines.length; i++) {
+        // let line = lines[i]
+        if (lines[i].includes("Name") &&
+            lines[i].includes("Output Folder") &&
+            lines[i].includes("Result") &&
+            lines[i].includes("Generation Time") &&
+            lines[i].includes("Compile Time")) {
+            headerLineIndex = i;
+            break;
+        }
+    }
+    if (headerLineIndex === -1) {
+        throw new Error("Could not find header row of seed test table");
+    }
+    // Parse column positions from the separator line
+    const headerLine = lines[headerLineIndex];
+    const columnPositions = [];
+    // Find column headers between two separators ( | )
+    for (let i = 0; i < headerLine.length; i++) {
+        if (headerLine[i] === "│") {
+            columnPositions.push(i);
+        }
+    }
+    // Extract header data between found column separators
+    const headers = [];
+    for (let i = 0; i < columnPositions.length - 1; i++) {
+        const start = columnPositions[i];
+        const end = columnPositions[i + 1];
+        const header = headerLine.substring(start, end).replace("│", "").trim();
+        headers.push(header);
+    }
+    console.log(`headers: ${headers}`);
+    // Find the indices of the columns we want
+    const nameIndex = headers.indexOf("Name");
+    const outputFolderIndex = headers.indexOf("Output Folder");
+    const generationTimeIndex = headers.indexOf("Generation Time");
+    const compileTimeIndex = headers.indexOf("Compile Time");
+    console.log(`nameIndex: ${nameIndex}`);
+    console.log(`outputFolderIndex: ${outputFolderIndex}`);
+    console.log(`generationTimeIndex: ${generationTimeIndex}`);
+    console.log(`compileTimeIndex: ${compileTimeIndex}`);
+    if (nameIndex === -1 ||
+        outputFolderIndex === -1 ||
+        generationTimeIndex === -1 ||
+        compileTimeIndex === -1) {
+        throw new Error("Could not find all required header columns of seed test table");
+    }
+    const results = [];
+    // Parse data rows (start after the separator line which is after the header line)
+    for (let i = headerLineIndex + 2; i < lines.length; i++) {
+        const line = lines[i];
+        // Skip lines that don't look like data rows (e.g., bottom border)
+        if (!line.includes("│") || line.startsWith("└")) {
+            continue;
+        }
+        const rowData = [];
+        // Extract each row of data (test information)
+        for (let j = 0; j < columnPositions.length - 1; j++) {
+            const start = columnPositions[j];
+            const end = columnPositions[j + 1];
+            const value = line.substring(start, end).replace("│", "").trim();
+            rowData.push(value);
+        }
+        // Note: Will eventually add back errors for missing compile and generation times,
+        // but for now need to work around the fact that we don't require these to pass and so
+        // a lot fail (and thus don't have one of the times available)
+        // Error if any expected data is missing
+        if (!rowData[nameIndex])
+            throw new Error(`Missing Name data in row ${i}`);
+        if (!rowData[outputFolderIndex])
+            throw new Error(`Missing OutputFolder data in row ${i}`);
+        // if (!rowData[generationTimeIndex])
+        //   throw new Error(`Missing GenerationTime data in row ${i}`)
+        // if (!rowData[compileTimeIndex])
+        //   throw new Error(`Missing CompileTime data in row ${i}`)
+        // Combo the name with the output folder name if it exists, separated by a colon
+        const fullTestName = rowData[outputFolderIndex] !== "--"
+            ? `${rowData[nameIndex]}:${rowData[outputFolderIndex]}`
+            : rowData[nameIndex];
+        const parsedRow = {
+            Name: fullTestName,
+            GenerationTime: rowData[generationTimeIndex]
+                ? rowData[generationTimeIndex]
+                : "0",
+            CompileTime: rowData[compileTimeIndex] ? rowData[compileTimeIndex] : "0",
+        };
+        results.push(parsedRow);
+    }
+    return results;
+}
+
+// Function to convert time strings to seconds. Acceptable formats as inputs are:
+// 1. 1m 23s
+// 2. 1m 23.7s
+// 3. 43s
+// 4. 43.7s
+// 5. 700ms
+// Will add floats but return rounded to the nearest integer. No need for that level of precision.
+function convertToSeconds(timeStr) {
+    if (!timeStr)
+        return 0;
+    let totalSeconds = 0;
+    // Extract milliseconds if present (more specific, extract first)
+    const msMatch = timeStr.match(/(\d+(?:\.\d+)?)ms/);
+    if (msMatch) {
+        totalSeconds += parseFloat(msMatch[1]) / 1000;
+    }
+    else {
+        // Extract minutes (if present)
+        const minuteMatch = timeStr.match(/(\d+)m\s/);
+        if (minuteMatch) {
+            totalSeconds += parseInt(minuteMatch[1]) * 60;
+        }
+        // Extract seconds (if present)
+        const secondMatch = timeStr.match(/(\d+(?:\.\d+)?)s/);
+        if (secondMatch) {
+            totalSeconds += parseFloat(secondMatch[1]);
+        }
+    }
+    console.log(`Given String: ${timeStr}. Converted to seconds: ${totalSeconds}`);
+    return Math.round(totalSeconds);
+}
+function calculateTotalTimes(data) {
+    const totalTimes = {};
+    for (const item of data) {
+        const generationSeconds = convertToSeconds(item.GenerationTime);
+        const compileSeconds = convertToSeconds(item.CompileTime);
+        const totalSeconds = generationSeconds + compileSeconds;
+        // Store using the Name as the key
+        totalTimes[item.Name] = totalSeconds;
+    }
+    return totalTimes;
 }
 
 /**
@@ -27267,20 +27434,88 @@ async function wait(milliseconds) {
  */
 async function run() {
     try {
-        const ms = coreExports.getInput('milliseconds');
-        // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-        coreExports.debug(`Waiting ${ms} milliseconds ...`);
-        // Log the current timestamp, wait, then log the new timestamp
-        coreExports.debug(new Date().toTimeString());
-        await wait(parseInt(ms, 10));
-        coreExports.debug(new Date().toTimeString());
-        // Set outputs for other workflow steps to use
-        coreExports.setOutput('time', new Date().toTimeString());
+        coreExports.info("Starting seed test grouping");
+        const numberOfGroupsInput = coreExports.getInput("number-of-groups");
+        const seedTestLogFilePath = coreExports.getInput("seed-test-log-file-path");
+        // Start by validating inputs
+        // Validate number-of-groups
+        let numberOfGroups = 0;
+        if (numberOfGroupsInput) {
+            numberOfGroups = parseInt(numberOfGroupsInput);
+            coreExports.debug(`Number of groups: ${numberOfGroups}`);
+        }
+        else {
+            coreExports.error("No number-of-groups provided");
+            return;
+        }
+        // Validate seed-test-log-file-path
+        if (seedTestLogFilePath) {
+            if (require$$1.existsSync(seedTestLogFilePath)) {
+                coreExports.debug(`Seed test log file path exists: ${seedTestLogFilePath}`);
+            }
+            else {
+                coreExports.error(`Provided seed-test-log-file-path does not exist: ${seedTestLogFilePath}`);
+                return;
+            }
+        }
+        else {
+            coreExports.error("No seed test log provided");
+            return;
+        }
+        // Parse table of tests and times out from seed test log file
+        let extractedTableOfTests = "";
+        try {
+            const fileContent = require$$1.readFileSync(seedTestLogFilePath, "utf-8");
+            // TODO FER-6948: make parsing more robust with tags like mentioned in ticket
+            const startTag = "┌──────";
+            const endTag = "test cases";
+            const startIndex = fileContent.indexOf(startTag);
+            const endIndex = fileContent.indexOf(endTag, startIndex + startTag.length);
+            if (startIndex !== -1 && endIndex !== -1) {
+                extractedTableOfTests = fileContent.substring(startIndex + startTag.length, endIndex);
+            }
+            else {
+                console.log(`Table parsing delimiters not found in ${seedTestLogFilePath} or in incorrect order.`);
+            }
+        }
+        catch (error) {
+            console.error("Error reading seed test log file:", error);
+        }
+        console.log("Successfully parsed test table from test log file!");
+        // Parse row data from table of tests and times
+        const extractedJsonData = await parseDataFromSeedTestAsciiTable(extractedTableOfTests);
+        // Validate extracted json-data
+        if (!extractedJsonData) {
+            coreExports.error("No data returned from parseTimesFromSeedTestAsciiTable");
+            return;
+        }
+        // Convert string time format into usable format and combine generation and compile times for a single time
+        const result = calculateTotalTimes(extractedJsonData);
+        const jsonOfTestTotalTimes = JSON.stringify(result, null, 2);
+        console.debug(`jsonOfTestTotalTimes: ${jsonOfTestTotalTimes}`);
+        console.log(`\nTotal entries processed: ${Object.keys(result).length}`);
+        // Convert result object to array format for createBalancedGroups
+        const itemsArray = Object.entries(result).map(([name, time]) => ({
+            name: name,
+            time: time,
+        }));
+        // Group the tests into balanced groups
+        const balancedGroups = createBalancedGroups(itemsArray, numberOfGroups);
+        const jsonOfBalancedGroups = JSON.stringify(balancedGroups, null, 2);
+        console.debug(`jsonOfBalancedGroups: ${jsonOfBalancedGroups}`);
+        const totalTestTimeSeconds = Object.values(result).reduce((sum, time) => sum + time, 0);
+        const totalTestTimeRoundedSeconds = Math.round(totalTestTimeSeconds);
+        const fileContents = {
+            totalTestTimeSeconds: totalTestTimeRoundedSeconds,
+            groups: JSON.parse(jsonOfBalancedGroups),
+        };
+        const fileContentsAsJson = JSON.stringify(fileContents, null, 2);
+        console.debug(`fileContentsAsJson: ${fileContentsAsJson}`);
+        coreExports.setOutput("json-file-contents", fileContentsAsJson);
     }
     catch (error) {
-        // Fail the workflow run if an error occurs
-        if (error instanceof Error)
-            coreExports.setFailed(error.message);
+        coreExports.error(`Error: ${error}`);
+        return;
     }
 }
 
